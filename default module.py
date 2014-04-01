@@ -1,5 +1,4 @@
 
-
 class Sequence(object):
 
     def __init__(self, query, answer1, answer2, answer3, answer4, answerwrong):
@@ -10,55 +9,64 @@ class Sequence(object):
         self.answer4 = answer4
         self.answerwrong = answerwrong
 
-    def input():
+    def blank_input(self):
         answer = raw_input(" . . . ?").strip()
+        
+    def answer1_func(self):
+        print self.answer1
 
-    def game_play():
-        for line in query:
-            print line
+    def answer2_func(self):
+        print self.answer2
+
+    def answer3_func(self):
+        print self.answer3
+
+    def answer4_func(self):
+        print self.answer4
+
+    def game_play(self):
+        print self.query
         tries = 0
-        answer = ""
-        input()
+        answer = raw_input(" . . . ?").strip()
         while tries <= 2:
             if answer not in ("1", "2", "3", "4"):
                 print "You speak to me like I can understand you.  Try again."
-                input()
+                answer = raw_input(" . . . ?").strip()
                 tries += 1  
             elif answer == "1":
-                for line in answer1:
-                    print line
+                self.answer1_func()
                 break
             elif answer == "2":
-                for line in answer2:
-                    print line
+                self.answer2_func()
                 break
             elif answer == "3":
-                for line in answer3:
-                    print line
+                self.answer3_func()
                 break
             else:
-                for line in answer4:
-                    print line
+                self.answer4_func()
                 break
         else:
             while answer not in ("1", "2", "3", "4"):
                 print "Imagine what language sounds like to a rock."
-                input()
+                answer = raw_input(" . . . ?").strip()
             else:
                 if answer == "1":
-                    for line in answer1:
-                        print line
+                    self.answer1_func()
                 elif answer == "2":
-                    for line in answer2:
-                        print line
+                    self.answer2_func()
                 elif answer == "3":
-                    for line in answer3:
-                        print line
+                    self.answer3_func()
                 else:
-                    for line in answer4:
-                        print line
+                    self.answer4_func()
 
-opening_sequence()
-            
-        
-    
+opening_sequence = Sequence("Around you there is only darkness -- darkness extending " +
+                            "in every direction, thick as a mattress and heavy as an ending. " +
+                            "You can feel its weight on you.\n Do you open your eyes?\n " +
+                            "    1 - Yes\n     2 - No", "Darkness is the absence of light.  I " +                            "describe what you perceive as darkness because there is no light down here, " \
+                            "but you do not see it as black.\nIt is all you've ever known, " +
+                            "the only colour.  Indeed, you don\'t really \"see\" at all.\n" +
+                            "How are you so sure you have eyes?\nYou are a rock.", "Yes, what is there " +
+                            "to be curious about, anyway.\nAfter all -- you are a rock.", "", "", "")
+
+opening_sequence.game_play()
+#opening_sequence.blank_input()
