@@ -1,6 +1,9 @@
 
 class Sequence(object):
 
+    """Default gameplay sequence, takes four answers. answerwrong has yet to
+    be worked into its own function"""
+
     def __init__(self, query, answer1, answer2, answer3, answer4, answerwrong):
         self.query = query
         self.answer1 = answer1
@@ -59,7 +62,107 @@ class Sequence(object):
                 else:
                     self.answer4_func()
 
-opening_sequence = Sequence("Around you there is only darkness -- darkness extending " +
+class TwoAnswers(Sequence):
+
+    """Instance of class Sequence that takes only two correct answers.  For y/n
+    questions"""
+
+    def override_function(self):
+        tries = 1
+        print "You speak to me like I can understand you.  Try again."
+        answer = raw_input(" . . . ?").strip()
+        while tries <= 2:
+            if answer not in ("1", "2"):
+                print "You speak to me like I can understand you.  Try again."
+                answer = raw_input(" . . . ?").strip()
+                tries += 1
+            elif answer == "1":
+                self.answer1_func()
+                break
+            else:
+                self.answer2_func()
+                break
+        else:
+            while answer not in ("1", "2"):
+                print "Imagine what language sounds like to a rock."
+                answer = raw_input(" . . . ?").strip()
+            else:
+                if answer == "1":
+                    self.answer1_func()
+                else:
+                    self.answer2_func()
+
+    def answer3_func(self):
+        self.override_function()
+
+    def answer4_func(self):
+        self.override_function()
+
+class OneAnswer(Sequence):
+
+    """Instance of class Sequence that takes only one possible answer"""
+
+    def override_function(self):
+        tries = 1
+        print "You speak to me like I can understand you.  Try again."
+        answer = raw_input(" . . . ?").strip()
+        while tries <= 2:
+            if answer != "1":
+                print "You speak to me like I can understand you.  Try again."
+                answer = raw_input(" . . . ?").strip()
+                tries += 1
+            else:
+                self.answer1_func()
+                break
+        else:
+            while answer != "1":
+                print "Imagine what language sounds like to a rock."
+                answer = raw_input(" . . . ?").strip()
+            else:
+                self.answer1_func()
+
+    def answer2_func(self):
+        self.override_function()
+
+    def answer3_func(self):
+        self.override_function()
+
+    def answer4_func(self):
+        self.override_function()
+
+class ThreeAnswers(Sequence):
+
+    def answer4_func(self):
+        tries = 1
+        print "You speak to me like I can understand you.  Try again."
+        answer = raw_input(" . . . ?").strip()
+        while tries <= 2:
+            if answer not in ("1", "2", "3"):
+                print "You speak to me like I can understand you.  Try again."
+                answer = raw_input(" . . . ?").strip()
+                tries += 1
+            elif answer == "1":
+                self.answer1_func()
+                break
+            elif answer == "2":
+                self.answer2_func()
+                break
+            else:
+                self.answer3_func()
+                break
+        else:
+            while answer not in ("1", "2", "3"):
+                print "Imagine what language sounds like to a rock."
+                answer = raw_input(" . . . ?").strip()
+            else:
+                if answer == "1":
+                    self.answer1_func()
+                elif answer == "2":
+                    self.answer2_func()
+                else:
+                    self.answer3_func()
+        
+opening_sequence = TwoAnswers("Around you there is only darkness -- darkness extending " +
                             "in every direction, thick as a mattress and heavy as an ending. " +
                             "You can feel its weight on you.\n Do you open your eyes?\n " +
                             "    1 - Yes\n     2 - No", "Darkness is the absence of light.  I " +                            "describe what you perceive as darkness because there is no light down here, " \
