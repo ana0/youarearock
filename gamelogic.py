@@ -1,3 +1,4 @@
+#import time
 
 class Sequence(object):
 
@@ -13,29 +14,30 @@ class Sequence(object):
         self.answerwrong = answerwrong
 
     def blank_input(self):
-        answer = raw_input(" . . . ?").strip()
-        
+        """currently not being used!"""
+        answer = input(" . . . ?").strip()
+
     def answer1_func(self):
-        print self.answer1
+        print((self.answer1))
 
     def answer2_func(self):
-        print self.answer2
+        print(self.answer2)
 
     def answer3_func(self):
-        print self.answer3
+        print(self.answer3)
 
     def answer4_func(self):
-        print self.answer4
-
+        print(self.answer4)
+            
     def game_play(self):
-        print self.query
+        print(self.query)
         tries = 0
-        answer = raw_input(" . . . ?").strip()
+        answer = input(" . . . ?").strip()
         while tries <= 2:
             if answer not in ("1", "2", "3", "4"):
-                print "You speak to me like I can understand you.  Try again."
-                answer = raw_input(" . . . ?").strip()
-                tries += 1  
+                print("You speak to me like I can understand you.  Try again.")
+                answer = input(" . . . ?").strip()
+                tries += 1
             elif answer == "1":
                 self.answer1_func()
                 break
@@ -50,8 +52,8 @@ class Sequence(object):
                 break
         else:
             while answer not in ("1", "2", "3", "4"):
-                print "Imagine what language sounds like to a rock."
-                answer = raw_input(" . . . ?").strip()
+                print("Imagine what language sounds like to a rock.")
+                answer = input(" . . . ?").strip()
             else:
                 if answer == "1":
                     self.answer1_func()
@@ -62,19 +64,19 @@ class Sequence(object):
                 else:
                     self.answer4_func()
 
+
 class TwoAnswers(Sequence):
 
     """Instance of class Sequence that takes only two correct answers.  For y/n
     questions"""
 
-    def override_function(self):
+    def override(self):
+        """over rides the functions for answers 3,4 with a wrong answer sequence"""
         tries = 1
-        print "You speak to me like I can understand you.  Try again."
-        answer = raw_input(" . . . ?").strip()
         while tries <= 2:
+            answer = input(" . . . ?").strip()
             if answer not in ("1", "2"):
-                print "You speak to me like I can understand you.  Try again."
-                answer = raw_input(" . . . ?").strip()
+                print("You speak to me like I can understand you.  Try again.")
                 tries += 1
             elif answer == "1":
                 self.answer1_func()
@@ -84,8 +86,8 @@ class TwoAnswers(Sequence):
                 break
         else:
             while answer not in ("1", "2"):
-                print "Imagine what language sounds like to a rock."
-                answer = raw_input(" . . . ?").strip()
+                print("Imagine what language sounds like to a rock.")
+                answer = input(" . . . ?").strip()
             else:
                 if answer == "1":
                     self.answer1_func()
@@ -93,53 +95,52 @@ class TwoAnswers(Sequence):
                     self.answer2_func()
 
     def answer3_func(self):
-        self.override_function()
+        self.override()
 
     def answer4_func(self):
-        self.override_function()
+        self.override()
 
 class OneAnswer(Sequence):
 
     """Instance of class Sequence that takes only one possible answer"""
 
-    def override_function(self):
+    def override(self):
+        """over rides the functions for answers 2,3,4 with a wrong answer sequence"""
         tries = 1
-        print "You speak to me like I can understand you.  Try again."
-        answer = raw_input(" . . . ?").strip()
         while tries <= 2:
+            answer = input(" . . . ?").strip()
             if answer != "1":
-                print "You speak to me like I can understand you.  Try again."
-                answer = raw_input(" . . . ?").strip()
+                print("You speak to me like I can understand you.  Try again.")
+                answer = input(" . . . ?").strip()
                 tries += 1
             else:
                 self.answer1_func()
                 break
         else:
             while answer != "1":
-                print "Imagine what language sounds like to a rock."
-                answer = raw_input(" . . . ?").strip()
+                print("Imagine what language sounds like to a rock.")
+                answer = input(" . . . ?").strip()
             else:
                 self.answer1_func()
 
     def answer2_func(self):
-        self.override_function()
+        self.override()
 
     def answer3_func(self):
-        self.override_function()
+        self.override()
 
     def answer4_func(self):
-        self.override_function()
+        self.override()
 
 class ThreeAnswers(Sequence):
 
     def answer4_func(self):
         tries = 1
-        print "You speak to me like I can understand you.  Try again."
-        answer = raw_input(" . . . ?").strip()
         while tries <= 2:
+            answer = input(" . . . ?").strip()
             if answer not in ("1", "2", "3"):
-                print "You speak to me like I can understand you.  Try again."
-                answer = raw_input(" . . . ?").strip()
+                print("You speak to me like I can understand you.  Try again.")
+                answer = input(" . . . ?").strip()
                 tries += 1
             elif answer == "1":
                 self.answer1_func()
@@ -152,8 +153,8 @@ class ThreeAnswers(Sequence):
                 break
         else:
             while answer not in ("1", "2", "3"):
-                print "Imagine what language sounds like to a rock."
-                answer = raw_input(" . . . ?").strip()
+                print("Imagine what language sounds like to a rock.")
+                answer = input(" . . . ?").strip()
             else:
                 if answer == "1":
                     self.answer1_func()
@@ -162,14 +163,3 @@ class ThreeAnswers(Sequence):
                 else:
                     self.answer3_func()
         
-#opening_sequence = TwoAnswers("Around you there is only darkness -- darkness extending " +
-#                            "in every direction, thick as a mattress and heavy as an ending. " +
-#                            "You can feel its weight on you.\n Do you open your eyes?\n " +
-#                            "    1 - Yes\n     2 - No", "Darkness is the absence of light.  I " +                            "describe what you perceive as darkness because there is no light down here, " \
-#                            "but you do not see it as black.\nIt is all you've ever known, " +
-#                            "the only colour.  Indeed, you don\'t really \"see\" at all.\n" +
-#                            "How are you so sure you have eyes?\nYou are a rock.", "Yes, what is there " +
-#                            "to be curious about, anyway.\nAfter all -- you are a rock.", "", "", "")
-
-#opening_sequence.game_play()
-#opening_sequence.blank_input()
