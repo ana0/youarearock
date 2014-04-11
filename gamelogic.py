@@ -9,8 +9,9 @@ class Sequence(object):
         tries = 0
         as_list = list(self.answers)
         answer = input(" . . . ?").strip()
+        range_check = [i for i in range(1, len(as_list)+1)]
         while tries <= 2:
-            if int(answer) in range(1, len(as_list)):
+            if answer in str(range_check):
                 print(as_list[int(answer)-1])
                 break
             else:
@@ -18,9 +19,10 @@ class Sequence(object):
                 tries += 1
                 answer = input(" . . . ?").strip()
         else:
-            while int(answer) not in range(1, len(as_list)):
+            while answer not in str(range_check):
                 print("Imagine what language sounds like to a rock.")
                 answer = input(" . . . ?").strip()
             else:
-                print(as_list[int(answer)])
+                print(as_list[int(answer)-1])
                     
+
