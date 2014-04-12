@@ -24,14 +24,19 @@ pressure = Sequence("The sensation you feel most intensely is heaviness.  Though
                                 "the pressure of the organs as they expand and contract. They are contained by the skin "
                                 "-- A membrane in perfect balance.\n")
 
-#how_does_it_feel = Sequence("Roughly 50 kilobars envelop you. That's 5,000,000 Pascals, or 725.19 " 
-#	                        "pounds per square inch.\nIt has been with you since you crystalized.\nCan I " 
-#	                        "remind you that at one time, you crystalized -- literally?\nHow did it feel?\n"
-#	                        "     1 - Good\n     2 - It hurt\n     3 - I don't remember", "It felt good the way "
-#                                "
+how_does_it_feel = Sequence("Roughly 50 kilobars envelop you. That's 5,000,000 Pascals, or 725.19 " 
+	                        "pounds per square inch.\nIt has been with you since you crystalized.\nCan I " 
+	                        "remind you that at one time, you crystalized -- literally?\nHow did it feel?\n"
+	                        "     1 - Good\n     2 - It hurt\n     3 - I don't remember", "Good. Sure.\n"
+                               "\"Nice\" -- but hardly comfortable.\nYou were rearranging on a molecular level, "
+                               "precipitating in the geological version of embryonic fluid.\nIt didn't feel good "
+                               "so much as inevitable.", "Of course it hurt. You were rearranging on a molecular level.\n"
+                               "But it hurt the way getting a bone set, or picking out a splinter hurts -- a pain to pass "
+                               "through on your way to order, as was amorphous becomes regular.\nDo planets pant on their way "
+                               "around the sun?", "I hear that's normal. I don't remember being born either.")
 
 opening_sequence.game_play()
 yes_thats_right.game_play()
 pressure.game_play()
-#time.sleep(20)
+how_does_it_feel.game_play()
 
