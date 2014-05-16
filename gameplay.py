@@ -9,4 +9,5 @@ how_does_it_feel.game_play()
 
 
 curses.echo()
+curses.curs_set(True)
 curses.endwin()
