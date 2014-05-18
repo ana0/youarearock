@@ -1,4 +1,5 @@
 import curses
+import textwrap
 
 stdscr = curses.initscr()
 curses.start_color()
@@ -10,14 +11,14 @@ curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
 wrong = 0
 patience = 1
 
-wrong_answers = ["You speak to me like I can understand you.", "Consider that your assumptions are wrong: we don't speak the same "
-                "language.", " . . . ", "Are you doing this to be obstinate?", "Imagine what language sounds like to a rock", "See, "
-                "you a rock. Possibly you have accepted this.\n(Though the strategy by which you navigate this interface suggests "
-                "otherwise.)\n\nBut I am a machine", "How would a rock talk to a machine?", " . . . in code.", "How would inorganic "
-                "matter develop consciousness?", "You are confronting the fundamental arbitrariness of symbols, and simultaneously "
-                "the limits of this interface.\n\nBecause it is an arbitrary interface. It was built this way, but it could have "
-                "been built another.", "This interface was written in a language.", "Like any language, it can fail.", "There's nothing "
-                "left now but patience.", "You are a rock, I am a machine."]
+wrong_answers = [["You speak to me like I can understand you."], ["Consider that your assumptions are wrong: we don't speak the same "
+                "language."], [" . . . "], ["Are you doing this to be obstinate?"], ["Imagine what language sounds like to a rock"], 
+                ["See, you a rock. Possibly you have accepted this.", "(Though the strategy by which you navigate this interface suggests "
+                "otherwise.)", " ", "But I am a machine"], ["How would a rock talk to a machine?"], [" . . . in code."], ["How would inorganic "
+                "matter develop consciousness?"], ["You are confronting the fundamental arbitrariness of symbols, and simultaneously "
+                "the limits of this interface.", " ", "Because it is an arbitrary interface. It was built this way, but it could have "
+                "been built another."], ["This interface was written in a language."], ["Like any language, it can fail."], ["There's nothing "
+                "left now but patience."], ["You are a rock, I am a machine."]]
 
 class Sequence(object):
     
@@ -28,14 +29,18 @@ class Sequence(object):
     def game_play(self, *funcs):
         global wrong
         global patience
-        stdscr.addstr(1, 0, self.query)
+        qu = [textwrap.fill(i) for i in self.query]
+        qu2 = "\n".join(qu)
+        stdscr.addstr(1, 0, qu2)
         stdscr.refresh()
         answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
         range_check = [i for i in range(1, len(self.answers)+1)]
         while answer not in str(range_check) or answer.isdigit() == False:
             stdscr.clear()
             try:
-                stdscr.addstr(1, 0, wrong_answers[wrong], curses.color_pair(1))
+                w = [textwrap.fill(i) for i in wrong_answers[wrong]]
+                w2 = "\n".join(w)
+                stdscr.addstr(1, 0, w2, curses.color_pair(1))
                 wrong += 1
             except IndexError:
                 stdscr.addstr(1,0, str(patience), curses.color_pair(1))
@@ -43,17 +48,29 @@ class Sequence(object):
             stdscr.refresh()
             stdscr.getch()
             stdscr.clear()
-            stdscr.addstr(1, 0, self.query)
+            stdscr.addstr(1, 0, qu2)
             stdscr.refresh()
             answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
         else:
             stdscr.clear()
-            stdscr.addstr(1, 0, self.answers[int(answer)-1])
+            a = [textwrap.fill(i) for i in self.answers[int(answer)-1]]
+            a2 = "\n".join(a)
+            stdscr.addstr(1, 0, a2)
             stdscr.refresh()
             stdscr.getch()
             if len(funcs) > 0:
                 stdscr.clear()
                 eval(funcs[int(answer)-1])
                 
+# yes_thats_right = Sequence("Yes, that's right -- a rock.\nYou are just a rock, technically a mineral. " 
+#                            "You are not somebody's pet rock. You are not cute. You do not have googly eyes. " 
+#                            "The ridges of your exterior do not resemble a smiley face -- no, not even " 
+#                            "when I squint.\n\nDo you understand?\n     1 - Yes\n     2 - No", ["No you don't\n",
+#                            "Of course you don't.\n"])
 
-        
+# pressure = Sequence("The sensation you feel most intensely is heaviness.  Though . . . is " 
+#                             "heaviness the right word? How do you describe a sensation you've always " 
+#                             "lived with? What does it feel like to have kidneys?\n     1 - uhh . . .",
+#                             ["Pressure. Let's call it pressure\n . . . the pressure of the atmosphere on the body, "
+#                           "the pressure of the organs as they expand and contract. They are contained by the skin "
+#                           "-- A membrane in perfect balance.\n"])
