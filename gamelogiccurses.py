@@ -26,21 +26,22 @@ class Sequence(object):
         self.query = query
         self.answers = answers
 
+    def text_wrapping(self, text):
+        qu = [textwrap.fill(i) for i in text]
+        quwrapped = "\n".join(qu)
+        return quwrapped
+
     def game_play(self, *funcs):
         global wrong
         global patience
-        qu = [textwrap.fill(i) for i in self.query]
-        qu2 = "\n".join(qu)
-        stdscr.addstr(1, 0, qu2)
+        stdscr.addstr(1, 0, self.text_wrapping(self.query))
         stdscr.refresh()
         answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
         range_check = [i for i in range(1, len(self.answers)+1)]
         while answer not in str(range_check) or answer.isdigit() == False:
             stdscr.clear()
             try:
-                w = [textwrap.fill(i) for i in wrong_answers[wrong]]
-                w2 = "\n".join(w)
-                stdscr.addstr(1, 0, w2, curses.color_pair(1))
+                stdscr.addstr(1, 0, self.text_wrapping(wrong_answers[wrong]), curses.color_pair(1))
                 wrong += 1
             except IndexError:
                 stdscr.addstr(1,0, str(patience), curses.color_pair(1))
@@ -53,9 +54,7 @@ class Sequence(object):
             answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
         else:
             stdscr.clear()
-            a = [textwrap.fill(i) for i in self.answers[int(answer)-1]]
-            a2 = "\n".join(a)
-            stdscr.addstr(1, 0, a2)
+            stdscr.addstr(1, 0, self.text_wrapping(self.answers[int(answer)-1]))
             stdscr.refresh()
             stdscr.getch()
             if len(funcs) > 0:
