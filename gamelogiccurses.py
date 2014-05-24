@@ -20,6 +20,22 @@ wrong_answers = [["You speak to me like I can understand you."], ["Consider that
                 "been built another."], ["This interface was written in a language."], ["Like any language, it can fail."], ["There's nothing "
                 "left now but patience."], ["You are a rock, I am a machine."]]
 
+vocabulary = {
+    "darkness" : " . . . . ",
+    "ending" : " . . . . ",
+    "perceive" : " . . . . ",
+    "exterior" : " . . . . ",
+    "heaviness" : " . . . . ",
+    "pressure" : " . . . . ",
+    "atmosphere" : " . . . . ",
+    "membrane" : " . . . . ",
+    "Pascals" : " . . . . ",
+    "crystalized" : " . . . . ",
+    "precipitating" : " . . . . ",
+    "molecular" : " . . . . ",
+    "amorphous" : " . . . . ",
+}
+
 class Sequence(object):
     
     def __init__(self, query, answers):
@@ -27,14 +43,22 @@ class Sequence(object):
         self.answers = answers
 
     def text_wrapping(self, text):
-        qu = [textwrap.fill(i) for i in text]
-        quwrapped = "\n".join(qu)
-        return quwrapped
+        maxx = stdscr.getmaxyx()[1] - stdscr.getyx()[1]
+        if len(text) > maxx:
+            stdscr.addstr("\n")
+        return text
 
     def game_play(self, *funcs):
         global wrong
         global patience
-        stdscr.addstr(1, 0, self.text_wrapping(self.query))
+        #NEXT implement punctuation exceptions
+        for i in self.query:
+            if i in vocabulary:
+                stdscr.addstr(self.text_wrapping(i) + " ", curses.color_pair(1))
+            elif i == " ":
+                stdscr.addstr("\n")
+            else:
+                stdscr.addstr(self.text_wrapping(i) + " ")
         stdscr.refresh()
         answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
         range_check = [i for i in range(1, len(self.answers)+1)]
@@ -49,7 +73,7 @@ class Sequence(object):
             stdscr.refresh()
             stdscr.getch()
             stdscr.clear()
-            stdscr.addstr(1, 0, qu2)
+            stdscr.addstr(1, 0, self.text_wrapping(self.query))
             stdscr.refresh()
             answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
         else:

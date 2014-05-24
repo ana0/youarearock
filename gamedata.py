@@ -1,33 +1,42 @@
 import curses
 from gamelogiccurses import *
 
-# vocabulary = {
-#     "darkness" : " . . . . ";
-#     "ending" :
-#     "perceive"
-#     "exterior"
-#     "heaviness"
-#     "pressure"
-#     "atmosphere"
-#     "membrane"
-#     "Pascals"
-#     "crystalized"
-#     "precipitating"
-#     "molecular"
-#     "amorphous"
-#     ""
-#}
+vocabulary = {
+    "darkness" : " . . . . ",
+    "ending" : " . . . . ",
+    "perceive" : " . . . . ",
+    "exterior" : " . . . . ",
+    "heaviness" : " . . . . ",
+    "pressure" : " . . . . ",
+    "atmosphere" : " . . . . ",
+    "membrane" : " . . . . ",
+    "Pascals" : " . . . . ",
+    "crystalized" : " . . . . ",
+    "precipitating" : " . . . . ",
+    "molecular" : " . . . . ",
+    "amorphous" : " . . . . ",
+}
 
-
-opening_sequence = Sequence(["Around you there is only darkness -- darkness extending " 
-                            "in every direction, thick as a mattress and heavy as an ending. " 
-                            "You can feel its weight on you.", " ", "Do you open your eyes?" ,
-                            "    1 - Yes", "    2 - No", "    . . . ?"], [["Darkness is the absence of light.  I " 
+opening_sequence = Sequence(["Around", "you", "there", "is", "only", "darkness", "--", "darkness", "extending",
+                            "in", "every", "direction", ",", "thick", "as", "a", "mattress", "and", "heavy", "as",
+                            "an", "ending.", 
+                            "You can feel its weight on you.", " ", " ", "Do ", "you", "open", "your", "eyes?", " ",
+                            "    1 - Yes", " ", "    2 - No", " ", "    . . . ?"], [["Darkness is the absence of light.  I " 
                             "describe what you perceive as darkness because there is no light down here, " 
                             "but you do not see it as black. It is all you've ever known, " 
                             "the only colour.  Indeed, you don\'t really \"see\" at all.", " ",
                             "How are you so sure you have eyes?", "You are a rock."], ["Yes, what is there " 
                             "to be curious about, anyway.", "After all -- you are a rock."]])
+
+# opening_sequence = Sequence(["Around you there is only darkness -- darkness extending " 
+#                             "in every direction, thick as a mattress and heavy as an ending. " 
+#                             "You can feel its weight on you.", " ", "Do you open your eyes?" ,
+#                             "    1 - Yes", "    2 - No", "    . . . ?"], [["Darkness is the absence of light.  I " 
+#                             "describe what you perceive as darkness because there is no light down here, " 
+#                             "but you do not see it as black. It is all you've ever known, " 
+#                             "the only colour.  Indeed, you don\'t really \"see\" at all.", " ",
+#                             "How are you so sure you have eyes?", "You are a rock."], ["Yes, what is there " 
+#                             "to be curious about, anyway.", "After all -- you are a rock."]])
 
 yes_thats_right = Sequence(["Yes, that's right -- a rock.", "You are just a rock, technically a mineral. " 
                            "You are not somebody's pet rock. You are not cute. You do not have googly eyes. " 
