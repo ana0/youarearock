@@ -17,26 +17,26 @@ vocabulary = {
     "amorphous" : " . . . . ",
 }
 
-opening_sequence = Sequence(["Around", "you", "there", "is", "only", "darkness", "--", "darkness", "extending",
-                            "in", "every", "direction", ",", "thick", "as", "a", "mattress", "and", "heavy", "as",
-                            "an", "ending.", 
-                            "You can feel its weight on you.", " ", " ", "Do ", "you", "open", "your", "eyes?", " ",
-                            "    1 - Yes", " ", "    2 - No", " ", "    . . . ?"], [["Darkness is the absence of light.  I " 
-                            "describe what you perceive as darkness because there is no light down here, " 
-                            "but you do not see it as black. It is all you've ever known, " 
-                            "the only colour.  Indeed, you don\'t really \"see\" at all.", " ",
-                            "How are you so sure you have eyes?", "You are a rock."], ["Yes, what is there " 
-                            "to be curious about, anyway.", "After all -- you are a rock."]])
-
-# opening_sequence = Sequence(["Around you there is only darkness -- darkness extending " 
-#                             "in every direction, thick as a mattress and heavy as an ending. " 
-#                             "You can feel its weight on you.", " ", "Do you open your eyes?" ,
-#                             "    1 - Yes", "    2 - No", "    . . . ?"], [["Darkness is the absence of light.  I " 
+# opening_sequence = Sequence(["Around", "you", "there", "is", "only", "darkness", "--", "darkness", "extending",
+#                             "in", "every", "direction", ",", "thick", "as", "a", "mattress", "and", "heavy", "as",
+#                             "an", "ending.", "You", "can", "feel",
+#                             "its", "weight", "on", "you", ".", " ", " ", "Do", "you", "open", "your", "eyes?", " ",
+#                             "    1 -", "Yes", " ", "    2 -", "No", " ", "    . . . ?"], [["Darkness is the absence of light.  I " 
 #                             "describe what you perceive as darkness because there is no light down here, " 
 #                             "but you do not see it as black. It is all you've ever known, " 
 #                             "the only colour.  Indeed, you don\'t really \"see\" at all.", " ",
 #                             "How are you so sure you have eyes?", "You are a rock."], ["Yes, what is there " 
 #                             "to be curious about, anyway.", "After all -- you are a rock."]])
+
+opening_sequence = Sequence("Around you there is only darkness -- darkness extending " 
+                            "in every direction , thick as a mattress and heavy as an ending . " 
+                            "You can feel its weight on you . \n\n Do you open your eyes ? "
+                            "\n\n     1 - Yes \n     2 - No \n      . . . ?", ["Darkness is the absence of light.  I " 
+                            "describe what you perceive as darkness because there is no light down here, " 
+                            "but you do not see it as black. It is all you've ever known, " 
+                            "the only colour.  Indeed, you don\'t really \"see\" at all.  "
+                            "How are you so sure you have eyes?  You are a rock.", "Yes, what is there " 
+                            "to be curious about, anyway.  After all -- you are a rock."])
 
 yes_thats_right = Sequence(["Yes, that's right -- a rock.", "You are just a rock, technically a mineral. " 
                            "You are not somebody's pet rock. You are not cute. You do not have googly eyes. " 
@@ -61,3 +61,4 @@ how_does_it_feel = Sequence(["Roughly 50 kilobars envelop you. That's 5,000,000 
                            "But it hurt the way getting a bone set, or picking out a splinter hurts -- a pain to pass "
                            "through on your way to order, as what was amorphous becomes regular.", "Do planets pant on their way "
                            "around the sun?"], ["I hear that's normal. I don't remember being born either."]])
+# of_course_not = Sequence()

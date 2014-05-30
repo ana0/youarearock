@@ -44,42 +44,43 @@ class Sequence(object):
 
     def text_wrapping(self, text):
         maxx = stdscr.getmaxyx()[1] - stdscr.getyx()[1]
+        if text not in [",", "?", "."]:
+            text = " " + text
         if len(text) > maxx:
             stdscr.addstr("\n")
         return text
 
+    def pretty_printing(self, text):
+        #text is a list of strings, each a single word
+        words = text.split(" ")
+        stdscr.clear()
+        for i in words:
+            if i in vocabulary:
+                stdscr.addstr(self.text_wrapping(i), curses.color_pair(1))
+            else:
+                stdscr.addstr(self.text_wrapping(i))
+        stdscr.refresh()
+
     def game_play(self, *funcs):
         global wrong
         global patience
-        #NEXT implement punctuation exceptions
-        for i in self.query:
-            if i in vocabulary:
-                stdscr.addstr(self.text_wrapping(i) + " ", curses.color_pair(1))
-            elif i == " ":
-                stdscr.addstr("\n")
-            else:
-                stdscr.addstr(self.text_wrapping(i) + " ")
-        stdscr.refresh()
+        self.pretty_printing(self.query)
         answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
         range_check = [i for i in range(1, len(self.answers)+1)]
         while answer not in str(range_check) or answer.isdigit() == False:
             stdscr.clear()
             try:
-                stdscr.addstr(1, 0, self.text_wrapping(wrong_answers[wrong]), curses.color_pair(1))
+                self.pretty_printing(wrong_answers[wrong])
                 wrong += 1
             except IndexError:
                 stdscr.addstr(1,0, str(patience), curses.color_pair(1))
                 patience += 1
             stdscr.refresh()
             stdscr.getch()
-            stdscr.clear()
-            stdscr.addstr(1, 0, self.text_wrapping(self.query))
-            stdscr.refresh()
+            self.pretty_printing(self.query)
             answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
         else:
-            stdscr.clear()
-            stdscr.addstr(1, 0, self.text_wrapping(self.answers[int(answer)-1]))
-            stdscr.refresh()
+            self.pretty_printing(self.answers[int(answer)-1])
             stdscr.getch()
             if len(funcs) > 0:
                 stdscr.clear()
