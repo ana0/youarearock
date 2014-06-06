@@ -16,9 +16,7 @@ curses.init_pair(6, curses.COLOR_GREEN, curses.COLOR_BLACK)
 wrong = 0
 patience = 1
 
-wrong_answers = 
-                #changing error messages 
-                ["You speak to me like I can understand you .", "Consider that your assumptions are wrong : we don't speak the same "
+wrong_answers = ["You speak to me like I can understand you .", "Consider that your assumptions are wrong : we don't speak the same "
                 "language .", " .  .  . ", "Are you doing this to be obstinate ?", "Imagine what language sounds like to a rock", 
                 "See , you a rock . Possibly you have accepted this. \n ( Though the strategy by which you navigate this interface suggests "
                 "otherwise . ) \n\n But I am a machine", "How would a rock talk to a machine ?", " .  .  . in code .", "How does inorganic matter develop consciousness ?", 
@@ -32,8 +30,8 @@ science = {
     "ending" : " . . . . ",
     "perceive" : " . . . . ",
     "exterior" : "noun : \n In casual topology, the \" outside \" . \n\n technical : \n The union of all open sets of a topological space that are disjoint from"
-                " the subset in question . \n\n metaphorical : \n A primitive interface . The point where I meet you , "
-                "and where self meets object . \n\n ( I don't mean to call you an object , but then again , you are a rock . )",
+                " the subset in question . \n\n metaphorical : \n The point where I meet you , "
+                "and where self meets object . A primitive interface . \n\n ( I don't mean to call you an object , but then again , you are a rock . )",
     "heaviness" : " . . . . ",
     "pressure" : " . . . . ",
     "atmosphere" : " . . . . ",
@@ -63,9 +61,9 @@ speech = {
 }
 
 punctuation = {
-    "," = " ",
-    "?" = " ",
-    "." = " ",
+    "," : " ",
+    "?" : " ",
+    "." : " ",
 
 }
 
@@ -101,13 +99,23 @@ class Sequence(object):
     def pretty_printing(self, text):
         #splits text, a string, into a list of strings, checks dicts for them, and changes print colour accordingly
         words = text.split(" ")
-        stdscr.clear()
+        #stdscr.clear()
         for i in words:
             if i.lower() in science:
                 stdscr.addstr(self.text_wrapping(i), curses.color_pair(2))
+            elif i.lower() in speech:
+                stdscr.addstr(self.text_wrapping(i), curses.color_pair(3))
+            elif i.lower() in structure:
+                stdscr.addstr(self.text_wrapping(i), curses.color_pair(4))
+            elif i in punctuation:
+                stdscr.addstr(self.text_wrapping(i), curses.color_pair(5))
             else:
                 stdscr.addstr(self.text_wrapping(i))
         stdscr.refresh()
+
+    def check_dicts(answer):
+        pass
+
 
     def game_play(self, *funcs):
         #branch dictionaries
@@ -121,16 +129,22 @@ class Sequence(object):
         while answer not in str(range_check) or answer.isdigit() == False:
             stdscr.clear()
             try:
+                stdscr.addstr(0, 1, "ERR: Wrong input \n\n     ", curses.color_pair(1))
+                stdscr.refresh()
                 self.pretty_printing(wrong_answers[wrong])
                 wrong += 1
             except IndexError:
+                stdscr.addstr("ERR: Wrong input \n\n     ", curses.color_pair(1))
+                stdscr.refresh()
                 stdscr.addstr(1,0, str(patience), curses.color_pair(1))
                 patience += 1
-            stdscr.refresh()
+            #stdscr.refresh()
             stdscr.getch()
+            stdscr.clear()
             self.pretty_printing(self.query)
             answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
         else:
+            stdscr.clear()
             self.pretty_printing(self.answers[int(answer)-1])
             stdscr.getch()
             if len(funcs) > 0:

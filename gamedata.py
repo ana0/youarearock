@@ -38,15 +38,15 @@ opening_sequence = Sequence("Around you there is only darkness -- darkness exten
                             "How are you so sure you have eyes ? \n\n You are a rock .", "Yes , what is there " 
                             "to be curious about , anyway . After all -- you are a rock ."])
 
-yes_thats_right = Sequence("Yes , that's right -- a rock .", "You are just a rock , technically a mineral . " 
+yes_thats_right = Sequence("Yes , that's right -- a rock . \n You are just a rock , technically a mineral . " 
                            "You are not somebody's pet rock . You are not cute . You do not have googly eyes . " 
                            "The ridges of your exterior do not resemble a smiley face -- no , not even " 
                            "when I squint . \n\n Do you understand ? \n\n     1 - Yes \n     2 - No \n      .  .  .  ?", ["No you don't .",
                            "Of course you don't ."])
 
-pressure = Sequence(["The sensation you feel most intensely is heaviness .  Though .  .  .  is " 
+pressure = Sequence("The sensation you feel most intensely is heaviness .  Though .  .  .  is " 
 	                        "heaviness the right word ? How do you describe a sensation you've always " 
-	                        "lived with ? \n\n What does it feel like to have kidneys ? \n\n    1 - uhh . . ."],
+	                        "lived with ? \n\n What does it feel like to have kidneys ? \n\n    1 - uhh . . .",
 	                        ["Pressure. Let's call it pressure \n .  .  .  the pressure of the atmosphere on the body , "
                           "the pressure of the organs as they expand and contract . They are contained by the skin "
                           "-- A membrane in perfect balance ."])
@@ -60,6 +60,6 @@ how_does_it_feel = Sequence("Roughly 50 kilobars envelop you . That's 5,000,000 
                            "so much as inevitable .", "Of course it hurt . You were rearranging on a molecular level .", 
                            "But it hurt the way getting a bone set , or picking out a splinter hurts -- a pain to pass "
                            "through on your way to order , as what was amorphous becomes regular . \n Do planets pant on their way "
-                           "around the sun ?"], ["I hear that's normal . I don't remember being born either ."])
+                           "around the sun ?", "I hear that's normal . I don't remember being born either ."])
 
 # of_course_not = Sequence()
