@@ -27,60 +27,6 @@ wrong_answers = ["You speak to me like I can understand you .", "Consider that y
                 " using mean anything at all ?", "There's nothing left now but patience .", "You are a rock , I am a machine . \n\n  .  .  . not as different"
                 " as you'd think."]
 
-science = {
-    "darkness" : "noun : \n Lacking light . \n\n ",
-    "ending" : " . . . . ",
-    "perceive" : " . . . . ",
-    "exterior" : "noun : \n In casual topology, the \" outside \" . \n\n technical : \n The union of all open sets of a topological space that are disjoint from"
-                " the subset in question . \n\n metaphorical : \n The point where I meet you , "
-                "and where self meets object . A primitive interface . \n\n ( I don't mean to call you an object , but then again , you are a rock . )",
-    "heaviness" : " . . . . ",
-    "pressure" : " . . . . ",
-    "atmosphere" : " . . . . ",
-    "membrane" : " . . . . ",
-    "Pascals" : " . . . . ",
-    "crystalized" : " . . . . ",
-    "precipitating" : " . . . . ",
-    "molecular" : " . . . . ",
-    "amorphous" : " . . . . ",
-    "rock" : " ",
-    "machine" : " ",
-    "topology" : " ",
-    "disjoint" : "adjective \n\n technical : Two sets are \" disjoint \" if they have no elements in common . ",
-    "open sets" : "noun plural \n\n technical : \n An open set is an abstract concept generalizing the idea of an open interval in the real line . "
-                "The condition of its definition are very loose , and they allow enormous flexibility in the choice of open sets . In the two extremes "
-                ", every set can be open , or no set can be open but the space itself .",
-}
-
-speech = {
-    "noun" : "",
-    "yes" : "",
-    "no" : "",
-    "plural" : "",
-    "a" : " ",
-    "you" : " ",
-    "adjective" : " ",
-}
-
-punctuation = {
-    "," : " ",
-    "?" : " ",
-    "." : " ",
-
-}
-
-structure = {
-    "metaphorical" : "",
-    "language" : " ",
-    "interface" : " ",
-    "code" : " ",
-    "technical" : " ",
-    "definition" : " "
-}
-
-funcs = {}
-
-
 class Sequence(object):
     #fundamental logic object of the game
     
@@ -102,16 +48,7 @@ class Sequence(object):
         #splits text, a string, into a list of strings, checks dicts for them, and changes print colour accordingly
         words = text.split(" ")
         for i in words:
-            if i.lower() in science:
-                stdscr.addstr(self.text_wrapping(i), curses.color_pair(2))
-            elif i.lower() in speech:
-                stdscr.addstr(self.text_wrapping(i), curses.color_pair(4))
-            elif i.lower() in structure:
-                stdscr.addstr(self.text_wrapping(i), curses.color_pair(3))
-            elif i in punctuation:
-                stdscr.addstr(self.text_wrapping(i), curses.color_pair(5))
-            else:
-                stdscr.addstr(self.text_wrapping(i))
+            stdscr.addstr(self.text_wrapping(i))
         stdscr.refresh()
 
     def check_dicts(self, i):
@@ -127,7 +64,10 @@ class Sequence(object):
             elif i in punctuation:
                 self.pretty_printing(punctuation[i])
             stdscr.refresh()
-            stdscr.getch()
+            i = stdscr.getstr(0, 0).decode(encoding = "utf-8")
+            self.check_dicts(i)
+        else:
+            return i
 
     def game_play(self, *funcs):
         #branch dictionaries!!
@@ -138,7 +78,10 @@ class Sequence(object):
         self.pretty_printing(self.query)
         answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
         #self.check_dicts(answer)
-        range_check = [i for i in range(1, len(self.answers)+1)]
+        # stdscr.clear()
+        # stdscr.addstr(str(answer))
+        # stdscr.refresh()
+        range_check = [i for i in range(len(self.answers))]
         while answer not in str(range_check) or answer.isdigit() == False:
             try:
                 stdscr.clear()
@@ -159,11 +102,11 @@ class Sequence(object):
             #self.check_dicts(answer)
         else:
             stdscr.clear()
-            self.pretty_printing(self.answers[int(answer)-1])
+            self.pretty_printing(self.answers[int(answer)])
             stdscr.getch()
             #answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
             #self.check_dicts(answer)
             if len(funcs) > 0:
                 stdscr.clear()
-                eval(funcs[int(answer)-1])
+                eval(funcs[int(answer)])
                 

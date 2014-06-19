@@ -8,6 +8,8 @@ technical_composition.game_play()
 pressure.game_play()
 how_does_it_feel.game_play()
 how_long.game_play()
+time_passes.game_play()
+exterior.game_play()
 
 
 curses.echo()
