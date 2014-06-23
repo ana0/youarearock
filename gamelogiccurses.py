@@ -1,4 +1,5 @@
 import curses
+from gamedict import *
 
 
 stdscr = curses.initscr()
@@ -15,7 +16,7 @@ curses.init_pair(6, curses.COLOR_GREEN, curses.COLOR_BLACK)
 
 wrong = 0
 patience = 1
-#answer = ""
+
 
 wrong_answers = ["You speak to me like I can understand you .", "Consider that your assumptions are wrong : we don't speak the same "
                 "language .", " .  .  . ", "Are you doing this to be obstinate ?", "Imagine what language sounds like to a rock", 
@@ -48,39 +49,26 @@ class Sequence(object):
         #splits text, a string, into a list of strings, checks dicts for them, and changes print colour accordingly
         words = text.split(" ")
         for i in words:
-            stdscr.addstr(self.text_wrapping(i))
+            if vocabulary[i.lower()] == "noun":
+                stdscr.addstr(self.text_wrapping(i), curses.color_pair(2))
+            elif vocabulary[i.lower()] == "adjective":
+                stdscr.addstr(self.text_wrapping(i), curses.color_pair(3))
+            elif vocabulary[i.lower()] == "verb":
+                stdscr.addstr(self.text_wrapping(i), curses.color_pair(4))
+            elif vocabulary[i.lower()] == "adverb":
+                stdscr.addstr(self.text_wrapping(i), curses.color_pair(5))
+            elif vocabulary[i.lower()] == "pronoun":
+                stdscr.addstr(self.text_wrapping(i), curses.color_pair(6))
+            else:
+                stdscr.addstr(self.text_wrapping(i))
         stdscr.refresh()
 
-    def check_dicts(self, i):
-        #global answer
-        if i.lower() in science or speech or structure or punctuation:
-            stdscr.clear()
-            if i.lower() in science:
-                self.pretty_printing(science[i])
-            elif i.lower() in speech:
-                self.pretty_printing(speech[i])
-            elif i.lower() in structure:
-                self.pretty_printing(structure[i])
-            elif i in punctuation:
-                self.pretty_printing(punctuation[i])
-            stdscr.refresh()
-            i = stdscr.getstr(0, 0).decode(encoding = "utf-8")
-            self.check_dicts(i)
-        else:
-            return i
-
     def game_play(self, *funcs):
-        #branch dictionaries!!
-        #global answer
         global wrong
         global patience
         stdscr.clear()
         self.pretty_printing(self.query)
         answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
-        #self.check_dicts(answer)
-        # stdscr.clear()
-        # stdscr.addstr(str(answer))
-        # stdscr.refresh()
         range_check = [i for i in range(len(self.answers))]
         while answer not in str(range_check) or answer.isdigit() == False:
             try:
@@ -99,13 +87,10 @@ class Sequence(object):
             stdscr.clear()
             self.pretty_printing(self.query)
             answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
-            #self.check_dicts(answer)
         else:
             stdscr.clear()
             self.pretty_printing(self.answers[int(answer)])
             stdscr.getch()
-            #answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
-            #self.check_dicts(answer)
             if len(funcs) > 0:
                 stdscr.clear()
                 eval(funcs[int(answer)])
