@@ -65,7 +65,13 @@ exterior = Sequence("Feel your fingertips on the keys of your keyboard -- this s
                     " \" Exterior \" : noun . technical . The union of all open sets of a topological space that are disjoint from"
                     " the subset in question . idiomatic . The \" outside \" . The point where I meet you , where self meets object . \n\n "
                     "( I don't mean to call you an object but then again, You are a rock . ) \n\n "
-                    "     0 - ( You say nothing .)", ["There is nothing left to say ."])
+                    "     0 - ( You say nothing . )", ["There is nothing left to say ."])
 
-coltan = Sequence("You are columbite-tantalite . Trade name : coltan . \n\n ", [])
+coltan = Sequence("You are columbite-tantalite . Trade name : coltan . \n\n You should know that you are valuable . Rocks like you are mined all "
+                  "over the world, people die for you -- a blood mineral . An estimated 5.4 million have died in a 15-year conflict funded by . . . you . \n\n"
+                  "     0 - Why ?", ["When you are refined, a process of many chemical reactions ,"
+                  " you break down into niobium and tantalum . Both are valuable rare earth metals : High-grade tantalum is worth $350 - 400 USD per pound ."
+                  " It is used mostly to make tantalum capacitors , a key component of cell phones and  .  .  . computers ."])
+                  
 
+                  

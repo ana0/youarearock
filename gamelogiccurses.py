@@ -20,13 +20,13 @@ patience = 1
 
 wrong_answers = ["You speak to me like I can understand you .", "Consider that your assumptions are wrong : we don't speak the same "
                 "language .", " .  .  . ", "Are you doing this to be obstinate ?", "Imagine what language sounds like to a rock", 
-                "See , you a rock . Possibly you have accepted this. \n (Though the strategy by which you navigate this interface suggests "
-                "otherwise.) \n\n But I am a machine .", "How would a rock talk to a machine ?", " .  .  . in code ?",  
+                "See , you are a rock . Possibly you have accepted this . \n ( Though the strategy by which you navigate this interface suggests "
+                "otherwise . ) \n\n But I am a machine .", "How would a rock talk to a machine ?", " .  .  . in code ?",  
                 "You are confronting the fundamental arbitrariness of symbols , and simultaneously "
                 "the limits of this interface . \n\n Because it is an arbitrary interface ." , "It was built this way , but it could have "
                 "been built another .", "This interface was written in a language .", "Like any language , it can fail .", "Are you sure these words you're"
                 " using mean anything at all ?", "There's nothing left now but patience .", "You are a rock , I am a machine . \n\n  .  .  . not as different"
-                " as you'd think."]
+                " as you'd think ."]
 
 class Sequence(object):
     #fundamental logic object of the game
@@ -64,6 +64,8 @@ class Sequence(object):
         stdscr.refresh()
 
     def game_play(self, *funcs):
+        #fundamental gameplay method, checks answer (int) against a list index to print the 
+        #corresponding statement, also iterates through a list of possible wrong answers stored above as global variables
         global wrong
         global patience
         stdscr.clear()
@@ -94,4 +96,21 @@ class Sequence(object):
             if len(funcs) > 0:
                 stdscr.clear()
                 eval(funcs[int(answer)])
-                
+
+    def game_end(self):
+        global wrong
+        global patience
+        while True:
+            try:
+                stdscr.clear()
+                stdscr.addstr(0, 1, "ERR: Wrong input \n\n", curses.color_pair(1))
+                stdscr.refresh()
+                self.pretty_printing(wrong_answers[wrong])
+                wrong += 1
+            except IndexError:
+                stdscr.clear()
+                stdscr.addstr(0, 1, "ERR: Wrong input \n\n", curses.color_pair(1))
+                stdscr.refresh()
+                stdscr.addstr(1,0, "\n " + str(patience), curses.color_pair(1))
+                patience += 1
+            answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
