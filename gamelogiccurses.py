@@ -114,3 +114,16 @@ class Sequence(object):
                 stdscr.addstr(1,0, "\n " + str(patience), curses.color_pair(1))
                 patience += 1
             answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
+
+    def return_query(self):
+        return self.query
+
+    def return_answers(self):
+        for answer in self.answers:
+            return answer
+
+    def dictmaker(self, text, everyword):
+        words = text.split(" ")
+        for w in words:
+            everyword.append()
+        return everyword
