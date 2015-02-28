@@ -111,19 +111,25 @@ class Sequence(object):
                 stdscr.clear()
                 stdscr.addstr(0, 1, "ERR: Wrong input \n\n", curses.color_pair(1))
                 stdscr.refresh()
-                stdscr.addstr(1,0, "\n " + str(patience), curses.color_pair(1))
+                stdscr.addstr(1, 0, "\n " + str(patience), curses.color_pair(1))
                 patience += 1
             answer = stdscr.getstr(0, 0).decode(encoding = "utf-8")
 
     def return_query(self):
+        #gets text out of class object
         return self.query
 
     def return_answers(self):
-        for answer in self.answers:
-            return answer
+        #gets list of answers out of class object and returns them as a long string
+        all_answers = ""
+        for a in self.answers:
+            all_answers = all_answers + a
+        return all_answers
 
-    def dictmaker(self, text, everyword):
-        words = text.split(" ")
-        for w in words:
-            everyword.append()
-        return everyword
+
+    def get_all_words(self):
+        #returns a list of every word used in query and all answers
+        #list includes punctuation and duplicates, but no capitals
+        all_text = self.return_query() + self.return_answers()
+        all_words = [word.lower() for word in all_text.split()]
+        return all_words
