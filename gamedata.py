@@ -5,7 +5,7 @@ from gamelogiccurses import *
 opening_sequence = Sequence("Around you there is only darkness -- darkness extending " 
                             "in every direction , thick as a mattress and heavy as an ending . " 
                             "You can feel its weight on you . \n\n Do you open your eyes ? "
-                            "\n\n     0 - Yes \n     1 - No \n      .  .  .  ?", ["Darkness is the absence of light .  I " 
+                            "\n\n     0 - Yes \n     1 - No \n      .  .  .  ? ", ["Darkness is the absence of light .  I " 
                             "describe what you perceive as darkness because there is no light down here , " 
                             "but you do not see it as black . It is all you've ever known , " 
                             "the only colour .  Indeed , you don\'t really \" see \" at all . "

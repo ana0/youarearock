@@ -123,7 +123,7 @@ class Sequence(object):
         #gets list of answers out of class object and returns them as a long string
         all_answers = ""
         for a in self.answers:
-            all_answers = all_answers + a
+            all_answers = all_answers + " " + a
         return all_answers
 
 
@@ -131,5 +131,5 @@ class Sequence(object):
         #returns a list of every word used in query and all answers
         #list includes punctuation and duplicates, but no capitals
         all_text = self.return_query() + self.return_answers()
-        all_words = [word.lower() for word in all_text.split()]
-        return all_words
+        #all_words = [word.lower() for word in all_text.split()]
+        return all_text
