@@ -1,12 +1,12 @@
 import curses
 from database import opening
+import questionnode
+import time
 
 def run():
 	#initialize terminal
-	stdscr = curses.initscr()
-
-	curses.start_color()
-	opening.play(stdscr)
+	opening.play()
+	time.sleep(2)
 	# stdscr.clear()
 	# stdscr.addstr("cats")
 	# stdscr.refresh()
