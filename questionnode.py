@@ -57,28 +57,23 @@ class GameNode(object):
 			self.pretty_printing(i, standardscreen)
 			standardscreen.addstr(newlines)
 
-	def play(self):
-		if self.idnum == 0:
-			stdscr = curses.initscr()
-			curses.start_color()
+	def play(self, standardscreen):
 			# return stdscr
-		stdscr.clear()
-		stdscr.addstr("\n")
+		standardscreen.clear()
+		standardscreen.addstr("\n")
 		for i in self.query:
-			self.pretty_printing(i, stdscr)
-			stdscr.addstr("\n\n     ")
+			self.pretty_printing(i, standardscreen)
+			standardscreen.addstr("\n\n     ")
 		for i in self.options:
-			self.pretty_printing(i, stdscr)
-			stdscr.addstr("\n     ")
+			self.pretty_printing(i, standardscreen)
+			standardscreen.addstr("\n     ")
 		# stdscr.addstr("cats")
-		answer = stdscr.getstr(stdscr.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
-		stdscr.refresh()
+		answer = standardscreen.getstr(standardscreen.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
+		standardscreen.refresh()
 		while not answer in self.answer_map:
-			answer = stdscr.getstr(stdscr.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
+			answer = standardscreen.getstr(standardscreen.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
 		else:
-			stdscr.clear()
-			stdscr.addstr(str(self.answer_map[answer]))
-			stdscr.refresh()
+			return self.answer_map[answer]
 
 
 
