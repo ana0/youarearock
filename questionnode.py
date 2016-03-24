@@ -6,11 +6,12 @@ import curses
 class GameNode(object):
 	#game node object, contains text and major behaiours
 
-	def __init__(self, idnum, query, options):
+	def __init__(self, idnum, query, options, answer_map):
 		self.idnum = idnum
 		# self.stdscr = stdscr
 		self.query = query
 		self.options = options
+		self.answer_map = answer_map
 
 	def initialize_term(self):
 		if self.idnum == 0:
@@ -29,7 +30,7 @@ class GameNode(object):
 		return text
             
 	def pretty_printing(self, text, standardscreen):
-		#splits text, a string, into a list of strings, checks dicts for them, and changes print colour accordingly
+		"""splits text, a string, into a list of strings, checks dicts for them, and changes print colour accordingly"""
 		words = text.split(" ")
 		for i in words:
 			# if vocabulary[i.lower()] == "noun":
@@ -46,15 +47,38 @@ class GameNode(object):
 			standardscreen.addstr(self.text_wrapping(i, standardscreen))
 		standardscreen.refresh()
 
+	def print_with_newlines(self, text_as_list, amount_newlines, spaces, standardscreen):
+		newlines = 0
+		for i in range(amount_newlines):
+			newlines += "\n"
+		if spaces:
+			newlines += "     "
+		for i in text_as_list:
+			self.pretty_printing(i, standardscreen)
+			standardscreen.addstr(newlines)
+
 	def play(self):
 		if self.idnum == 0:
 			stdscr = curses.initscr()
 			curses.start_color()
 			# return stdscr
 		stdscr.clear()
-		self.pretty_printing(self.query, stdscr)
+		stdscr.addstr("\n")
+		for i in self.query:
+			self.pretty_printing(i, stdscr)
+			stdscr.addstr("\n\n     ")
+		for i in self.options:
+			self.pretty_printing(i, stdscr)
+			stdscr.addstr("\n     ")
 		# stdscr.addstr("cats")
+		answer = stdscr.getstr(stdscr.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
 		stdscr.refresh()
+		while not answer in self.answer_map:
+			answer = stdscr.getstr(stdscr.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
+		else:
+			stdscr.clear()
+			stdscr.addstr(str(self.answer_map[answer]))
+			stdscr.refresh()
 
 
 
