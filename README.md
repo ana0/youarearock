@@ -13,3 +13,7 @@ Currently in beta-testing and awaiting deployment - Any feedback much appreciate
 Email sarah.anne.friend@gmail.com
 
 ![Alt text](/screenshots/Screen%20Shot%202016-05-13%20at%209.07.13%20PM.png?raw=true "Opening Sequence")
+
+![Alt text](/screenshots/Screen%20Shot%202016-05-13%20at%209.07.38%20PM.png?raw=true "Scene two")
+
+![Alt text](/screenshots/Screen%20Shot%202016-05-13%20at%209.12.08%20PM.png?raw=true "Error message")
