@@ -12,4 +12,4 @@ Currently in beta-testing and awaiting deployment - Any feedback much appreciate
 
 Email sarah.anne.friend@gmail.com
 
-More info about me @ www.sarahfriend.com
+![Alt text](/screenshots/Screen%20Shot%202016-05-13%20at%209.07.13%20PM.png?raw=true "Opening Sequence")
