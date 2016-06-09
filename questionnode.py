@@ -20,8 +20,8 @@ class GameNode(object):
 			opening.play()
 
 	def text_wrapping(self, text, standardscreen):
-        #simple textwrapper, check how much space is left on the x-axis of the screen 
-        #if a word's length is longer than the remaining space, adds a newline
+        """simple textwrapper, check how much space is left on the x-axis  
+        if a word's length is longer than the remaining space, adds a newline"""
 		maxx = standardscreen.getmaxyx()[1] - standardscreen.getyx()[1]
 		if text not in [",", "?", ".", ":"]:
 		    text = " " + text
@@ -30,7 +30,8 @@ class GameNode(object):
 		return text
             
 	def pretty_printing(self, text, standardscreen):
-		"""splits text, a string, into a list of strings, checks dicts for them, and changes print colour accordingly"""
+		"""splits text, a string, into a list of strings, checks dicts for them, 
+		and changes print colour accordingly"""
 		words = text.split(" ")
 		for i in words:
 			# if vocabulary[i.lower()] == "noun":
@@ -47,7 +48,8 @@ class GameNode(object):
 			standardscreen.addstr(self.text_wrapping(i, standardscreen))
 		standardscreen.refresh()
 
-	def print_with_newlines(self, text_as_list, amount_newlines, spaces, standardscreen):
+	def print_with_newlines(self, text_as_list, amount_newlines, spaces, 
+							standardscreen):
 		newlines = 0
 		for i in range(amount_newlines):
 			newlines += "\n"
@@ -68,16 +70,32 @@ class GameNode(object):
 			self.pretty_printing(i, standardscreen)
 			standardscreen.addstr("\n     ")
 		# stdscr.addstr("cats")
-		answer = standardscreen.getstr(standardscreen.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
+		answer = standardscreen.getstr(
+			standardscreen.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
 		standardscreen.refresh()
 		while not answer in self.answer_map:
-			answer = standardscreen.getstr(standardscreen.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
+			answer = standardscreen.getstr(
+				standardscreen.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
 		else:
 			return self.answer_map[answer]
 
+class NoAnswerNode(GameNode):
+	def __init__(self, idnum, query, answer_map):
+		self.idnum = idnum
+		# self.stdscr = stdscr
+		self.query = query
+		self.answer_map = answer_map
 
+	def play(self, standardscreen):
+		# return stdscr
+	standardscreen.clear()
+	standardscreen.addstr("\n")
+	for i in self.query:
+		self.pretty_printing(i, standardscreen)
+		standardscreen.addstr("\n\n     ")
+	# stdscr.addstr("cats")
+	answer = standardscreen.getch(
+		standardscreen.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
+	standardscreen.refresh()
+	return self.answer_map["0"]
 
-#id
-#text
-#options(0-4)
-#linked nodes
