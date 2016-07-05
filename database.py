@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import curses
 from questionnode import GameNode, NoAnswerNode, GameEnd
 
@@ -14,7 +16,7 @@ one = NoAnswerNode(1, ["Darkness is the absence of light . I describe what you "
     "eyes ?"],
     {"0":8})
 
-two = GameNode(2, ["Hmm .", "Why not ?"], 
+two = GameNode(2, ["Hmm .", "Why not ?"],
     ["0 - I'm asleep", "1 - I'm dreaming", "2 - I'm obstinate .", "3 - I'm not "
     "curious .", "4 - I . . . don't know ."], 
     {"0":4, "1":5, "2":6, "3":3, "4":9})
@@ -82,7 +84,7 @@ ten6 = GameNode(16, ["You are a granular pegmatite, an igneous rock composed"
     " make it more clear to you ?"], 
     ["0 -  . . . what ?", "1 - Those words don't make sense to me .", "2 - I "
     "think I'm starting to understand .", "3 - No really , I'm a geologist . "], 
-    {"0":17 "1":18, "2":19 "3":20})
+    {"0":17, "1":18, "2":19,     "3":20})
 
 ten7 = NoAnswerNode(17, ["Indeed"],
     {"0":""})
@@ -100,16 +102,17 @@ twenty = GameNode(20, ["As a scientist , you've spent your life searching for "
     "pit mine, or human cruelty.", "We exchange arbitrary symbols disguised as "
     "language, but do we see the same green?"], 
     ["0 - Yes", "1 - No", "2 - The symbols aren't arbitrary"], 
-    {"0":21, "1":22 "2":21})
+    {"0":21, "1":22, "2":21})
 
 twenty1 = GameNode(21, ["Let's try again.", "Do we see the same green?"], 
-    ["0 - 0 is True", "1 - 0 is False", "2 - 真正", "3 - 假"], 
-    {"0":26, "1":26, "2":"", "3":26)
+    ["0 - 0 is True", "1 - 0 is False", u"2 - 真正".encode('utf_8'), 
+    u"3 - 假".encode('utf_8')], 
+    {"0":26, "1":26, "2":"", "3":26})
 
 twenty2 = GameNode(22, ["Describe the green you see to me"], 
     ["0 - It's the colour of a forest", "1 - A dollar bill", "2 - Of a circuit "
     "board"], 
-    {"0":24 "1":25, "2":23})
+    {"0":24, "1":25, "2":23})
 
 twenty3 = NoAnswerNode(23, ["How prescient .", "But let's not get carried away "
     "here . You are still a rock ."],
@@ -128,8 +131,8 @@ twenty5 = NoAnswerNode(25, ["Little slips of paper with tremendous power. They "
 
 twenty6 = GameNode(26, ["Wrong. Let's try again.", "Nini ni ya kijani?"], 
     ["0 - kweli", "1 - si kweli", "2 - True|False", "3 - True^True"], 
-    {"0":"" "1":"", "2":"", "3":""})
+    {"0":"", "1":"", "2":"", "3":""})
 
 twenty7 = GameNode(27, ["Wrong.", "Ma lo crino?"], 
     ["0 - kweli", "1 - si kweli", "2 - True|False", "3 - True^True"], 
-    {"0":"" "1":"", "2":"", "3":""})
+    {"0":"", "1":"", "2":"", "3":""})

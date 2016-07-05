@@ -1,7 +1,10 @@
+
+
 import curses
 import database
 import questionnode
 import time
+import locale
 
 def get_node_by_idnum(num):
     pass
@@ -11,6 +14,7 @@ nodes = {i: database.__dict__[i] for i in database.__dict__ if
 
 def run():
     #initialize terminal
+    locale.setlocale(locale.LC_ALL,"")
     stdscr = curses.initscr()
     curses.start_color()
 
@@ -25,7 +29,5 @@ def run():
 
 if __name__ == "__main__":
 	run()
-
-
 
 
