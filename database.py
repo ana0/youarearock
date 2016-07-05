@@ -103,8 +103,8 @@ twenty = GameNode(20, ["As a scientist , you've spent your life searching for "
     {"0":21, "1":22 "2":21})
 
 twenty1 = GameNode(21, ["Let's try again.", "Do we see the same green?"], 
-    ["0 - 0", "1 - 1", "2 - 真正", "3 - 假"], 
-    {"0":"" "1":"", "2":"", "3":""})
+    ["0 - 0 is True", "1 - 0 is False", "2 - 真正", "3 - 假"], 
+    {"0":26, "1":26, "2":"", "3":26)
 
 twenty2 = GameNode(22, ["Describe the green you see to me"], 
     ["0 - It's the colour of a forest", "1 - A dollar bill", "2 - Of a circuit "
@@ -125,3 +125,11 @@ twenty5 = NoAnswerNode(25, ["Little slips of paper with tremendous power. They "
     "hapless rocks become bullets.", "But let's not get carried away here. You "
     "are still a rock."],
     {"0":""})
+
+twenty6 = GameNode(26, ["Wrong. Let's try again.", "Nini ni ya kijani?"], 
+    ["0 - kweli", "1 - si kweli", "2 - True|False", "3 - True^True"], 
+    {"0":"" "1":"", "2":"", "3":""})
+
+twenty7 = GameNode(27, ["Wrong.", "Ma lo crino?"], 
+    ["0 - kweli", "1 - si kweli", "2 - True|False", "3 - True^True"], 
+    {"0":"" "1":"", "2":"", "3":""})
