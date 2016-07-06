@@ -22,5 +22,14 @@ class TestAnswers(unittest.TestCase):
                 "node %s has no options and %s map points" % 
                 (str(nodes[node].idnum), str(len(nodes[node].answer_map))))
 
+    def test_all_maps_valid(self):
+        global nodes
+        node_ids = [nodes[node].idnum for node in nodes]
+        node_ids.append("")
+        for node in nodes:
+            for map_point in nodes[node].answer_map:
+                self.assertIn(nodes[node].answer_map[map_point], node_ids, 
+                "node %s has an invalid map point")
+
 if __name__ == '__main__':
     unittest.main()
