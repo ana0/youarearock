@@ -1,30 +1,19 @@
 import curses
 
-# stdscr = curses.initscr()
-# curses.start_color()
 
 class GameNode(object):
     #game node object, contains text and major behaiours
 
     def __init__(self, idnum, query, options, answer_map):
         self.idnum = idnum
-        # self.stdscr = stdscr
         self.query = query
         self.options = options
         self.answer_map = answer_map
-
-    def initialize_term(self):
-        if self.idnum == 0:
-            stdscr = curses.initscr()
-            curses.start_color()
-            opening.play()
 
     def text_wrapping(self, word, standardscreen):
         """simple textwrapper, check how much space is left on the x-axis  
         if a word's length is longer than the remaining space, adds a newline"""
         maxx = standardscreen.getmaxyx()[1] - standardscreen.getyx()[1]
-        # if text not in [",", "?", ".", ":"]:
-        #     text = " " + text
         word = " " + word
         if len(word) + 1 > maxx:
             standardscreen.addstr("\n")
@@ -59,6 +48,8 @@ class GameNode(object):
         standardscreen.refresh()
 
     def colour_lookup(self, word, standardscreen):
+        """not implemented yet - will go against nltk to get word part of 
+        speech"""
         standardscreen.addstr(word)
 
     def print_with_newlines(self, text_as_list, amount_newlines, spaces, 
@@ -73,7 +64,7 @@ class GameNode(object):
             standardscreen.addstr(newlines)
 
     def play(self, standardscreen):
-            # return stdscr
+        """main play function, gets user input and returns next node"""
         standardscreen.clear()
         standardscreen.addstr("\n")
         for i in self.query:
@@ -82,7 +73,6 @@ class GameNode(object):
         for i in self.options:
             self.pretty_printing(i, standardscreen)
             standardscreen.addstr("\n     ")
-        # stdscr.addstr("cats")
         answer = standardscreen.getstr(
             standardscreen.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
         standardscreen.refresh()
@@ -95,18 +85,16 @@ class GameNode(object):
 class NoAnswerNode(GameNode):
     def __init__(self, idnum, query, answer_map):
         self.idnum = idnum
-        # self.stdscr = stdscr
         self.query = query
         self.answer_map = answer_map
 
     def play(self, standardscreen):
-        # return stdscr
+        """main play function displays text and returns next node"""
         standardscreen.clear()
         standardscreen.addstr("\n")
         for i in self.query:
             self.pretty_printing(i, standardscreen)
             standardscreen.addstr("\n\n     ")
-        # stdscr.addstr("cats")
         answer = standardscreen.getch(
             standardscreen.getmaxyx()[0]-2,5)
         standardscreen.refresh()
