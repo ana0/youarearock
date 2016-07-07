@@ -1,5 +1,3 @@
-
-
 import curses
 import database
 import questionnode
@@ -12,12 +10,8 @@ def get_node_by_idnum(num):
 nodes = {i: database.__dict__[i] for i in database.__dict__ if 
         isinstance(database.__dict__[i], questionnode.GameNode)}
 
-def run():
-    #initialize terminal
-    locale.setlocale(locale.LC_ALL,"")
-    stdscr = curses.initscr()
-    curses.start_color()
-
+def run(stdscr):
+    curses.echo()
     next_node = database.opening.play(stdscr)
     while next_node != "":
 	    for node in nodes:
@@ -25,9 +19,8 @@ def run():
 	            next_node = nodes[node].play(stdscr)
     time.sleep(5)
 
-    curses.endwin()
-
 if __name__ == "__main__":
-	run()
+    locale.setlocale(locale.LC_ALL,"")
+    curses.wrapper(run)
 
 
