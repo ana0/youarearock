@@ -4,11 +4,11 @@ import curses
 class GameNode(object):
     #game node object, contains text and major behaiours
 
-    def __init__(self, idnum, query, options, answer_map):
+    def __init__(self, idnum, query, options):
         self.idnum = idnum
         self.query = query
         self.options = options
-        self.answer_map = answer_map
+        self.answer_map = {}
 
     def text_wrapping(self, word, standardscreen):
         """simple textwrapper, check how much space is left on the x-axis  
@@ -83,10 +83,10 @@ class GameNode(object):
             return self.answer_map[answer]
 
 class NoAnswerNode(GameNode):
-    def __init__(self, idnum, query, answer_map):
+    def __init__(self, idnum, query):
         self.idnum = idnum
         self.query = query
-        self.answer_map = answer_map
+        self.answer_map = {}
 
     def play(self, standardscreen):
         """main play function displays text and returns next node"""
