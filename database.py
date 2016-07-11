@@ -14,11 +14,12 @@ opening = GameNode(0, ["Around you there is only darkness -- darkness extending"
     " feel its weight on you.", "Do you open your eyes? "],
     ["0 - Yes", "1 - No"])
 
-one = NoAnswerNode(1, ["Darkness is the absence of light. I describe what you "
+one = GameNode(1, ["Darkness is the absence of light. I describe what you "
     "perceive as darkness because there is no light down here, but you do not "
     "see it as black. It is all you've ever known, the only colour.  Indeed,"
     " you don't really 'see' at all.", "How are you so sure you have "
-    "eyes?"])
+    "eyes?"],
+    ["0 - . . . uh", "I don't know", "What?! I don't have eyes?"])
 
 two = GameNode(2, ["Hmm .", "Why not ?"],
     ["0 - I'm asleep", "1 - I'm dreaming", "2 - I'm obstinate .", "3 - I'm not "
@@ -110,14 +111,19 @@ twenty5 = NoAnswerNode(25, ["Little slips of paper with tremendous power. They "
     "hapless rocks become bullets.", "But let's not get carried away here. You "
     "are still a rock."])
 
-twenty6 = GameNode(26, ["Wrong. Let's try again.", "Nini ni ya kijani?"], 
+twenty6 = GameNode(26, ["Let's try again.", "Nini ni ya kijani?"], 
     ["0 - kweli", "1 - si kweli", "2 - True|False", "3 - True^True"])
 
-twenty7 = GameNode(27, ["Wrong.", "Ma lo crino?"], 
-    ["0 - kweli", "1 - si kweli", "2 - True|False", "3 - True^True"])
+twenty7 = GameNode(27, ["Ma lo crino?"], 
+    ["0 - jitfa", "1 - jetnu", "2 - f827cf462f62848df37c5e1e94a4da74",
+    "3 - f8320b26d30ab433c5a54546d21f414c"])
+
+twenty8 = GameNode(28, [" . . . enough.", "I hope you found that instructive.",
+    "Would you like to continue as a rock?"],
+    ["0 - Yes", "1 - No"])
 
 opening.answer_map = {"0":one, "1":two, "yes":one, "no":two, "y":one, "n":two}
-one.answer_map = {"0":eight}
+one.answer_map = {"0":eight, "1":eight, "2":eight}
 two.answer_map = {"0":four, "1":five, "2":six, "3":three, "4":nine}
 three.answer_map = {"0":eight}
 four.answer_map = {"0":eight}
@@ -137,10 +143,11 @@ ten7.answer_map = {"0":""}
 ten8.answer_map = {"0":""}
 ten9.answer_map = {"0":""}
 twenty.answer_map = {"0":twenty1, "1":twenty2, "2":twenty1}
-twenty1.answer_map = {"0":twenty6, "1":twenty6, "2":"", "3":twenty6}
+twenty1.answer_map = {"0":twenty6, "1":twenty6, "2":twenty6, "3":twenty6}
 twenty2.answer_map = {"0":twenty4, "1":twenty5, "2":twenty3}
 twenty3.answer_map = {"0":""}
 twenty4.answer_map = {"0":""}
 twenty5.answer_map = {"0":""}
-twenty6.answer_map = {"0":"", "1":"", "2":"", "3":""}
+twenty6.answer_map = {"0":twenty7, "1":twenty7, "2":twenty7 "3":twenty7}
 twenty7.answer_map = {"0":"", "1":"", "2":"", "3":""}
+twenty8.answer_map = {"0":"", "1":}
