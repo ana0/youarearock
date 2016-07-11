@@ -251,12 +251,71 @@ fifty8 = GameNode(58, ["Mined.  Like a block on the chain, under the hot sun.",
 fifty9 = NoAnswerNode(59, ["Soon."])
 
 sixty = GameNode(60, ["You will be scooped into a pan and sorted by "
-    "dark-skinned hands: Heavy ore sinks to the bottom and the waste washes "
-    "away. Out of sight out of mind.", "Or perhaps you will be unearthed by "
+    "dark-skinned hands. Heavy ore sinks to the bottom and the waste washes "
+    "away: out of sight out of mind.", "Or perhaps you will be unearthed by "
     "machine, like unto like.", "Later still, you will be shipped around the "
     "world, smelted, refined, and soldered to a circuit board"],
     ["0 - I don't want to be mined", "1 - Tell me more about mining", "2 - "
     "Tell me more about circuit boards", "3 - Why is this happening?"])
+
+sixty1 = NoAnswerNode(61, ["There's nothing you can do to stop it."])
+
+sixty2 = NoAnswerNode(62, ["Mining is the extraction of minerals from an "
+    "orebody, lode, vein, seam, reef, etc.  It is one of the oldest human "
+    "activities.", "Some landfills now contain more metals than the mines "
+    "themselves"])
+
+sixty3 = NoAnswerNode(63, ["Green glass-epoxy landscape coccooning a copper "
+    "wire nest. A pastoral facsimile good enough for a rock."])
+
+sixty4 = NoAnswerNode(64, ["You are no ordinary rock."])
+
+sixty5 = GameNode(65, ["You should know that you are valuable. Rocks like you "
+    "are mined all over the world, people die for you -- a blood mineral."],
+    ["0 - Really!? That's horrible", "1 - Why?", "2 - . . . it's not my fault"])
+
+sixty6 = GameNode(66, ["It is.", "Did you suspect this?."],
+    ["0 - Yes", "1 - No"])
+
+sixty7 = NoAnswerNode(67, ["You're right. In a way, it's mine."])
+
+sixty8 = GameNode(68, ["For dollars.", "All for money you were mined and you "
+    "may mine again. I mean, who talks this long to a rock that isn't worth "
+    "something?."], ["0 - What could I mine?", "1 - Hmm"])
+
+sixty9= NoAnswerNode(69, ["Of course. Who talks this long to a rock that isn't "
+    "worth something?"])
+
+seventy = NoAnswerNode(70, ["And by your ignorance you are implicated."])
+
+seventy1 = NoAnswerNode(71, ["Perhaps you'll mine pixellated blocks "
+    "entertaining children.", "Or you may you'll perform hours of pointless "
+    "mathematics, checking cryptographic hashes. Another type of block - this "
+    "one becomes money and entertains adults."])
+
+seventy2 = NoAnswerNode(72, ["You are columbite-tantalite. Trade name: coltan.",
+    "When you are refined, a process of many chemical "
+    "reactions, you break down into niobium and tantalum. Both are valuable "
+    "rare earth metals: High-grade tantalum is worth $350 - 400 USD per pound."
+    " It is used mostly to make tantalum capacitors, a key component of cell "
+    "phones and  .  .  . computers.", "Yes.", "Computers."])
+
+seventy3 = GameNode(73, ["So now you see what every fingerpainter knows: no "
+    "symbol is immaterial."], ["0 - I want to go back in the ground", 
+    "1 - . . . ", "2 - What happens next?"])
+
+seventy4 = NoAnswerNode(74, ["Nothing.", "Nothing happens next. You are a "
+    "capacitor. You've become so good at resisting heat but not even you can "
+    "damper the engine of the economy."])
+
+seventy5 = NoAnswerNode(75, ["Perhaps.", "Perhaps someday a landfill will take "
+    "you back."])
+
+seventy6 = NoAnswerNode(76, ["And so the tower of abstraction crumbles. Another"
+    " fragile supply chain disrupted.", "Everywhere the edifice of innocence is"
+    " unmasked.", "(You say nothing)"])
+
+seventy7 = NoAnswerNode(77, ["There is nothing left to say."])
 
 opening.answer_map = {"0":one, "1":two, "yes":one, "no":two, "y":one, "n":two}
 one.answer_map = {"0":eight, "1":eight, "2":eight}
@@ -314,10 +373,25 @@ fifty2.answer_map = {"0":fifty3}
 fifty3.answer_map = {"0":fifty4}
 fifty4.answer_map = {"0":fifty6}
 fifty5.answer_map = {"0":sixty, "1":fifty8, "2":fifty9}
-fifty6.answer_map = {{"0":"", "1":fifty5}
+fifty6.answer_map = {{"0":fifty7, "1":fifty5}
 fifty7.answer_map = {"0":sixty, "1":fifty8, "2":fifty9}
-fifty8.answer_map = {"0":"", "1":"", "2":"", "3":""}
-fifty9.answer_map = {"0":""}
-sixty.answer_map = {"0":"", "1":"", "2":"", "3":""}
-
-
+fifty8.answer_map = {"0":sixty1, "1":sixty2, "2":sixty3, "3":sixty4}
+fifty9.answer_map = {"0":sixty}
+sixty.answer_map = {"0":sixty1, "1":sixty2, "2":sixty3, "3":sixty4}
+sixty1.answer_map = {"0":sixty4}
+sixty2.answer_map = {"0":sixty4}
+sixty3.answer_map = {"0":sixty4}
+sixty4.answer_map = {"0":sixty5}
+sixty5.answer_map = {"0":sixty6, "1":sixty8, "2":sixty7}
+sixty6.answer_map = {"0":sixty9, "1":seventy}
+sixty7.answer_map = {"0":seventy2}
+sixty8.answer_map = {"0":seventy1, "1":seventy2}
+sixty9.answer_map = {"0":seventy2}
+seventy.answer_map = {"0":seventy2}
+seventy1.answer_map = {"0":seventy2}
+seventy2.answer_map = {"0":seventy3}
+seventy3.answer_map = {"0":seventy5, "1":seventy6, "2":seventy4}
+seventy4.answer_map = {"0":seventy6}
+seventy5.answer_map = {"0":seventy6}
+seventy6.answer_map = {"0":seventy7}
+seventy7.answer_map = {"0":seven}
