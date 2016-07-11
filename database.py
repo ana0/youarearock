@@ -227,6 +227,37 @@ fifty3 = GameNode(53, ["Feel your fingertips on the keys of your keyboard -- "
     "'outside'. The point where I meet you, where self meets object.", "(I "
     "don't mean to call you an object but then again, You are a rock.)"])
 
+fifty4 = NoAnswerNode(54, [". . ."])
+
+fifty5 = GameNode(55, ["What *do* you know.", "You are waiting for the miners"],
+    ["0 - . . . the miners?", "1 - What does that mean?", "2 - When are they "
+    "coming?"])
+
+fifty6 = GameNode(56, ["So how did you get here?"],
+    ["0 - Where is here?", "1 - I don't know"])
+
+fifty7 = GameNode(57, ["Somewhere between the cloud and the dirt, the kind of "
+    "place a rock can talk to a computer.", "You are waiting for the miners."],
+    ["0 - . . . the miners?", "1 - What does that mean?", "2 - When are they "
+    "coming?"])
+
+fifty8 = GameNode(58, ["Mined.  Like a block on the chain, under the hot sun.",
+    "Dug from the earth by machines or more likely, humans. Though what is the "
+    "difference anyway.", "Later still, you will be shipped around the world, "
+    "smelted, refined, and soldered to a circuit board."],
+    ["0 - I don't want to be mined", "1 - Tell me more about mining", "2 - "
+    "Tell me more about circuit boards", "3 - Why is this happening?"])
+
+fifty9 = NoAnswerNode(59, ["Soon."])
+
+sixty = GameNode(60, ["You will be scooped into a pan and sorted by "
+    "dark-skinned hands: Heavy ore sinks to the bottom and the waste washes "
+    "away. Out of sight out of mind.", "Or perhaps you will be unearthed by "
+    "machine, like unto like.", "Later still, you will be shipped around the "
+    "world, smelted, refined, and soldered to a circuit board"],
+    ["0 - I don't want to be mined", "1 - Tell me more about mining", "2 - "
+    "Tell me more about circuit boards", "3 - Why is this happening?"])
+
 opening.answer_map = {"0":one, "1":two, "yes":one, "no":two, "y":one, "n":two}
 one.answer_map = {"0":eight, "1":eight, "2":eight}
 two.answer_map = {"0":four, "1":five, "2":six, "3":three, "4":nine}
@@ -280,5 +311,13 @@ forty9.answer_map = {"0":fifty3, "1":fifty2, "2":fifty}
 fifty.answer_map = {"0":fifty1, "1":ten5}
 fifty1.answer_map = {"0":fifty3}
 fifty2.answer_map = {"0":fifty3}
-fifty3.answer_map = {"0":""}
+fifty3.answer_map = {"0":fifty4}
+fifty4.answer_map = {"0":fifty6}
+fifty5.answer_map = {"0":sixty, "1":fifty8, "2":fifty9}
+fifty6.answer_map = {{"0":"", "1":fifty5}
+fifty7.answer_map = {"0":sixty, "1":fifty8, "2":fifty9}
+fifty8.answer_map = {"0":"", "1":"", "2":"", "3":""}
+fifty9.answer_map = {"0":""}
+sixty.answer_map = {"0":"", "1":"", "2":"", "3":""}
+
 
