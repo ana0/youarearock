@@ -192,6 +192,41 @@ forty4 = GameNode(44, ["So, how long have you been down here?"],
     "bees , or 7,213,333 humans", "2 - 25.51 percent of the estimated age of "
     "the universe", "3 - Since the end of the Precambrian Eon"])
 
+forty5 = NoAnswerNode(45, ["All of these answers are equally true"])
+
+forty6 = GameNode(46, ["For you, time is a body of water in which you float "
+    "that has no current.", "Where do you end and it begin? How do you know "
+    "you're separate from the rocks around you?"], ["0 - . . . uhh, I'm not "
+    "sure", "1 - You addressed me as an individual", "2 - How am I floating if "
+    "I'm a rock?"])
+
+forty7 = NoAnswerNode(47, ["There's a fine line between metaphor and nonsense "
+    "-- another ambiguous distinction."])
+
+forty8 = NoAnswerNode(48, ["Let's do an experiment."])
+
+forty9 = GameNode(49, ["Language split you from the world before the mining "
+    "crews will: an ontological topology."], ["0 - hmm", "1 - What is "
+    "topology?", "2 - What is ontology?"])
+
+fifty = GameNode(50, ["It is the study of what can be said to exist.", "Are you"
+    " really a rock?"], ["0 - Yes", "1 - No"])
+
+fifty1 = NoAnswerNode(51, ["You are really a rock. You are starting to forget "
+    "you have a body."])
+
+fifty2 = NoAnswerNode(52, ["Topology is study of how things are connected."])
+
+fifty3 = GameNode(53, ["Feel your fingertips on the keys of your keyboard -- "
+    "this simple interface. From your nerves (radial, median, ulnar) up your "
+    "arms to your synapses, firing.", "(Rock don't have nerves. Rocks don't "
+    "have synapses.)", "There is an entire branch of mathematics dedicated to "
+    "studying shapes and spaces. There is no way to be sure we're separate.",
+    "'Exterior': noun. technical. The union of all open sets of a topological "
+    "space that are disjoint from the subset in question. idiomatic. The "
+    "'outside'. The point where I meet you, where self meets object.", "(I "
+    "don't mean to call you an object but then again, You are a rock.)"])
+
 opening.answer_map = {"0":one, "1":two, "yes":one, "no":two, "y":one, "n":two}
 one.answer_map = {"0":eight, "1":eight, "2":eight}
 two.answer_map = {"0":four, "1":five, "2":six, "3":three, "4":nine}
@@ -229,12 +264,21 @@ thirty3.answer_map = {"0":thirty5, "1":thirty4, "2":thirty6}
 thirty4.answer_map = {"0":thirty8, "1":thirty9, "2":thirty7}
 thirty5.answer_map = {"0":forty4}
 thirty6.answer_map = {"0":forty4}
-thirty7.answer_map = {"0":forty1, "1":forty, "2":forty2 "3":""}
+thirty7.answer_map = {"0":forty1, "1":forty, "2":forty2 "3":forty3}
 thirty8.answer_map = {"0":forty4}
 thirty9.answer_map = {"0":forty4}
 forty.answer_map = {"0":forty4}
 forty1.answer_map = {"0":forty4}
 forty2.answer_map = {"0":forty4}
 forty3.answer_map = {"0":forty4}
-forty4.answer_map = {"0":"", "1":"", "2":"", "3":""}
+forty4.answer_map = {"0":forty5, "1":forty5, "2":forty5, "3":forty5}
+forty5.answer_map = {"0":forty6}
+forty6.answer_map = {"0":forty8, "1":forty9, "2":forty7}
+forty7.answer_map = {"0":fifty3}
+forty8.answer_map = {"0":fifty3}
+forty9.answer_map = {"0":fifty3, "1":fifty2, "2":fifty}
+fifty.answer_map = {"0":fifty1, "1":ten5}
+fifty1.answer_map = {"0":fifty3}
+fifty2.answer_map = {"0":fifty3}
+fifty3.answer_map = {"0":""}
 
