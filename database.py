@@ -1,13 +1,19 @@
 # coding: utf-8
 
 import curses
-from questionnode import GameNode, NoAnswerNode, GameEnd
+from questionnode import GameNode, NoAnswerNode, GameEnd, WrongAnswerHandler
 
-# opening = GameNode(0, ["Around you there is only darkness -- darkness extending" 
-#     " in every direction, thick as a mattress and heavy as an ending. You can"
-#     " feel its weight on you.", "Do you open your eyes? "],
-#     ["0 - Yes", "1 - No"], 
-#     {"0":1, "1":2, "yes":1, "no":2, "y":1, "n":2})
+wrong = WrongAnswerHandler(["You speak to me like I can understand you.", "Consider that "
+                "your assumptions are wrong: we don't speak the same language.",
+                " .  .  . ", "Imagine what language sounds like to a rock", 
+                " .  .  . ", "How would a rock talk to a machine?", " .  .  . "
+                "in code ?", "You have reached the limits of this interface. "
+                "\n\n Because it is an arbitrary interface." , "It was built "
+                "this way, but it could have been built another.", 
+                "It was written in a language. \n\n Like any "
+                "language, it can fail.", "Are you sure these words you're"
+                " using mean anything at all?", "Who is more patient? \n\n You "
+                "are a rock, I am a machine."], 0)
 
 opening = GameNode(0, ["Around you there is only darkness -- darkness extending" 
     " in every direction, thick as a mattress and heavy as an ending. You can"

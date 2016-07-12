@@ -69,8 +69,17 @@ class GameNode(object):
         speech"""
         standardscreen.addstr(word)
 
-    def play(self, standardscreen):
+    def play(self, standardscreen, wrong):
         """main play function, gets user input and returns next node"""
+        answer = self.prompt_input(standardscreen)
+        while not answer in self.answer_map:
+            wrong.print_error_message(standardscreen)
+            hang = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
+            answer = self.prompt_input(standardscreen)
+        else:
+            return self.answer_map[answer]
+
+    def prompt_input(self, standardscreen):
         standardscreen.clear()
         standardscreen.addstr("\n")
         for i in self.query:
@@ -82,11 +91,7 @@ class GameNode(object):
         answer = standardscreen.getstr(
             standardscreen.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
         standardscreen.refresh()
-        while not answer in self.answer_map:
-            answer = standardscreen.getstr(
-                standardscreen.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
-        else:
-            return self.answer_map[answer]
+        return answer
 
 class NoAnswerNode(GameNode):
     def __init__(self, idnum, query):
@@ -94,7 +99,7 @@ class NoAnswerNode(GameNode):
         self.query = query
         self.answer_map = {}
 
-    def play(self, standardscreen):
+    def play(self, standardscreen, wrong):
         """main play function displays text and returns next node"""
         standardscreen.clear()
         standardscreen.addstr("\n")
@@ -109,8 +114,6 @@ class NoAnswerNode(GameNode):
 class GameEnd(GameNode):
     # def __init__(self, idnum, query):
     #     self.idnum = idnum
-    #     self.ERRS = ERRS
-    #     self.count = count
     #     self.query = query
     #     self.options = options
     #     self.answer_map = answer_map
@@ -128,3 +131,18 @@ class GameEnd(GameNode):
     #     return self.answer_map["0"]
 
     pass
+
+class WrongAnswerHandler(GameNode):
+    def __init__(self, errors, wrong):
+        self.errors = errors
+        self.wrong = wrong
+
+    def print_error_message(self, standardscreen):
+        if self.wrong > len(self.errors):
+            return False
+        else:
+            standardscreen.clear()
+            standardscreen.addstr("\n ERR: Unidentified Error\n\n")
+            self.pretty_printing(self.errors[self.wrong], standardscreen)
+            self.wrong += 1
+            standardscreen.refresh()
