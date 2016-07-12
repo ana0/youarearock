@@ -161,9 +161,9 @@ thirty6 = NoAnswerNode(36, ["I hear that's normal. I don't remember being born "
 thirty7 = GameNode(37, ["Words are useless anyway", "What about numbers?"],
     ["0 - i", "1 - 96485.33289(59) C mol−1", "2 - 4.669201 . . .", "3 - 0"])
 
-thirty8 = GameNode(38, ["It hurt the way getting a bone set, or picking out a "
-    "splinter hurts -- a pain to pass through on your way to order, as what was"
-    " amorphous becomes regular.", "It also felt hot.  Over time, you will "
+thirty8 = NoAnswerNode(38, ["It hurt the way getting a bone set, or picking out"
+    " a splinter hurts -- a pain to pass through on your way to order, as what "
+    "was amorphous becomes regular.", "It also felt hot.  Over time, you will "
     "become very good at resisting heat."])
 
 thirty9 = NoAnswerNode(39, ["Sorry to hear that.", "There's nothing you can do "
@@ -217,9 +217,9 @@ fifty1 = NoAnswerNode(51, ["You are really a rock. You are starting to forget "
 
 fifty2 = NoAnswerNode(52, ["Topology is study of how things are connected."])
 
-fifty3 = GameNode(53, ["Feel your fingertips on the keys of your keyboard -- "
-    "this simple interface. From your nerves (radial, median, ulnar) up your "
-    "arms to your synapses, firing.", "(Rock don't have nerves. Rocks don't "
+fifty3 = NoAnswerNode(53, ["Feel your fingertips on the keys of your keyboard "
+    "-- this simple interface. From your nerves (radial, median, ulnar) up your"
+    " arms to your synapses, firing.", "(Rock don't have nerves. Rocks don't "
     "have synapses.)", "There is an entire branch of mathematics dedicated to "
     "studying shapes and spaces. There is no way to be sure we're separate.",
     "'Exterior': noun. technical. The union of all open sets of a topological "
@@ -343,7 +343,7 @@ twenty2.answer_map = {"0":twenty4, "1":twenty5, "2":twenty3}
 twenty3.answer_map = {"0":twenty9}
 twenty4.answer_map = {"0":twenty9}
 twenty5.answer_map = {"0":twenty9}
-twenty6.answer_map = {"0":twenty7, "1":twenty7, "2":twenty7 "3":twenty7}
+twenty6.answer_map = {"0":twenty7, "1":twenty7, "2":twenty7, "3":twenty7}
 twenty7.answer_map = {"0":twenty8, "1":twenty8, "2":twenty8, "3":twenty8}
 twenty8.answer_map = {"0":twenty9, "1":seven}
 twenty9.answer_map = {"0":thirty2, "1":thirty, "2":thirty1}
@@ -354,7 +354,7 @@ thirty3.answer_map = {"0":thirty5, "1":thirty4, "2":thirty6}
 thirty4.answer_map = {"0":thirty8, "1":thirty9, "2":thirty7}
 thirty5.answer_map = {"0":forty4}
 thirty6.answer_map = {"0":forty4}
-thirty7.answer_map = {"0":forty1, "1":forty, "2":forty2 "3":forty3}
+thirty7.answer_map = {"0":forty1, "1":forty, "2":forty2, "3":forty3}
 thirty8.answer_map = {"0":forty4}
 thirty9.answer_map = {"0":forty4}
 forty.answer_map = {"0":forty4}
@@ -373,7 +373,7 @@ fifty2.answer_map = {"0":fifty3}
 fifty3.answer_map = {"0":fifty4}
 fifty4.answer_map = {"0":fifty6}
 fifty5.answer_map = {"0":sixty, "1":fifty8, "2":fifty9}
-fifty6.answer_map = {{"0":fifty7, "1":fifty5}
+fifty6.answer_map = {"0":fifty7, "1":fifty5}
 fifty7.answer_map = {"0":sixty, "1":fifty8, "2":fifty9}
 fifty8.answer_map = {"0":sixty1, "1":sixty2, "2":sixty3, "3":sixty4}
 fifty9.answer_map = {"0":sixty}
