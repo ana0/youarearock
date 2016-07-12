@@ -25,14 +25,11 @@ class GameNode(object):
         words = text.split(" ")
         for i in words:
             i = self.text_wrapping(i, standardscreen)
-            if i[0:1] == "'" or i[0:1] == "(":
-                standardscreen.addstr(i[:2])
-                i = i[2:]
-            if i[-1:] in ["'", ".", "!", ":", ";", ")"]:
-                self.colour_lookup(i[:-1], standardscreen)
-                standardscreen.addstr(i[-1:])
-            else:
-                self.colour_lookup(i, standardscreen)
+            standardscreen.addstr(i[:self.begin_punc_check(i)])
+            self.colour_lookup(
+                i[self.begin_punc_check(i):self.safe_end_punc(i)[0]],
+                standardscreen)
+            standardscreen.addstr(i[self.safe_end_punc(i)[1]:])
             # if vocabulary[i.lower()] == "noun":
             #     stdscr.addstr(self.text_wrapping(i), curses.color_pair(2))
             # elif vocabulary[i.lower()] == "adjective":
@@ -47,21 +44,30 @@ class GameNode(object):
             # standardscreen.addstr(self.text_wrapping(i, standardscreen))
         standardscreen.refresh()
 
+    def end_punc_check(self, word):
+        """check end of word and count punctuation"""
+        if word[-1:] in ["'", ".", "!", ":", ";", ")", ",", "("]:
+            return self.end_punc_check(word[:-1]) -1
+        return 0
+
+    def safe_end_punc(self, word):
+        """corrects end_punc_check for weird string slicing behaviour"""
+        count = self.end_punc_check(word)
+        if count == 0:
+            return (None,len(word))
+        else:
+            return (count,count)
+
+    def begin_punc_check(self, word):
+        """check beginning of word and counts punctuation"""
+        if word[:1] in ["'", ".", "!", ":", ";", ")", ",", "("]:
+            return self.begin_punc_check(word[1:]) +1
+        return 0
+
     def colour_lookup(self, word, standardscreen):
         """not implemented yet - will go against nltk to get word part of 
         speech"""
         standardscreen.addstr(word)
-
-    def print_with_newlines(self, text_as_list, amount_newlines, spaces, 
-                            standardscreen):
-        newlines = 0
-        for i in range(amount_newlines):
-            newlines += "\n"
-        if spaces:
-            newlines += "     "
-        for i in text_as_list:
-            self.pretty_printing(i, standardscreen)
-            standardscreen.addstr(newlines)
 
     def play(self, standardscreen):
         """main play function, gets user input and returns next node"""
@@ -101,4 +107,24 @@ class NoAnswerNode(GameNode):
         return self.answer_map["0"]
 
 class GameEnd(GameNode):
+    # def __init__(self, idnum, query):
+    #     self.idnum = idnum
+    #     self.ERRS = ERRS
+    #     self.count = count
+    #     self.query = query
+    #     self.options = options
+    #     self.answer_map = answer_map
+
+    # def play(self, standardscreen):
+    #     """main play function displays text and returns next node"""
+    #     standardscreen.clear()
+    #     standardscreen.addstr("\n")
+    #     for i in self.query:
+    #         self.pretty_printing(i, standardscreen)
+    #         standardscreen.addstr("\n\n     ")
+    #     answer = standardscreen.getch(
+    #         standardscreen.getmaxyx()[0]-2,5)
+    #     standardscreen.refresh()
+    #     return self.answer_map["0"]
+
     pass

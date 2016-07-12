@@ -19,7 +19,7 @@ one = GameNode(1, ["Darkness is the absence of light. I describe what you "
     "see it as black. It is all you've ever known, the only colour.  Indeed,"
     " you don't really 'see' at all.", "How are you so sure you have "
     "eyes?"],
-    ["0 - . . . uh", "I don't know", "What?! I don't have eyes?"])
+    ["0 - . . . uh", "1 - I don't know", "2 - What?! I don't have eyes?"])
 
 two = GameNode(2, ["Hmm .", "Why not ?"],
     ["0 - I'm asleep", "1 - I'm dreaming", "2 - I'm obstinate .", "3 - I'm not "
