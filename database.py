@@ -12,8 +12,8 @@ wrong = WrongAnswerHandler(["You speak to me like I can understand you.", "Consi
                 "this way, but it could have been built another.", 
                 "It was written in a language. \n\n Like any "
                 "language, it can fail.", "Are you sure these words you're"
-                " using mean anything at all?", "Who is more patient? \n\n You "
-                "are a rock, I am a machine."], 0)
+                " using mean anything at all?", "Let's see who is more patient",
+                "You are a rock, I am a machine."], ["query"], ["options"])
 
 opening = GameNode(0, ["Around you there is only darkness -- darkness extending" 
     " in every direction, thick as a mattress and heavy as an ending. You can"
@@ -43,7 +43,7 @@ five = GameNode(5, ["What are you dreaming about?"],
 six = GameNode(6, ["No you're not.", "You are a rock."],
     ["0 - uh, ok", "1 - (Let me teach you something about being obstinate)"])
 
-seven = GameEnd(7, [], [])
+seven = GameEnd(7, ["query"], ["answer"])
 
 eight = GameNode(8, ["Yes, that's right -- a rock.", "You are just a rock,"
     " technically a mineral . You are not somebody's pet rock . You are not "
@@ -323,6 +323,8 @@ seventy6 = NoAnswerNode(76, ["And so the tower of abstraction crumbles. Another"
 
 seventy7 = NoAnswerNode(77, ["There is nothing left to say."])
 
+
+
 opening.answer_map = {"0":one, "1":two, "yes":one, "no":two, "y":one, "n":two}
 one.answer_map = {"0":eight, "1":eight, "2":eight}
 two.answer_map = {"0":four, "1":five, "2":six, "3":three, "4":nine}
@@ -330,7 +332,7 @@ three.answer_map = {"0":eight}
 four.answer_map = {"0":eight}
 five.answer_map = {"0":ten1, "1":ten2, "2":ten}
 six.answer_map = {"0":eight, "1":seven}
-seven.answer_map = {}
+seven.answer_map = {"0":seven, "1":""}
 eight.answer_map = {"0":ten3, "1":ten4, "2":ten5}
 nine.answer_map = {"0":eight}
 ten.answer_map = {"0":eight}

@@ -73,11 +73,10 @@ class GameNode(object):
         """main play function, gets user input and returns next node"""
         answer = self.prompt_input(standardscreen)
         while not answer in self.answer_map:
-            wrong.print_error_message(standardscreen)
-            hang = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
+            wrong.play(standardscreen, wrong)
             answer = self.prompt_input(standardscreen)
         else:
-            return self.answer_map[answer]
+            return self.answer_map[answer].play(standardscreen, wrong)
 
     def prompt_input(self, standardscreen):
         standardscreen.clear()
@@ -109,40 +108,50 @@ class NoAnswerNode(GameNode):
         answer = standardscreen.getch(
             standardscreen.getmaxyx()[0]-2,5)
         standardscreen.refresh()
-        return self.answer_map["0"]
+        return self.answer_map["0"].play(standardscreen, wrong)
 
 class GameEnd(GameNode):
-    # def __init__(self, idnum, query):
-    #     self.idnum = idnum
-    #     self.query = query
-    #     self.options = options
-    #     self.answer_map = answer_map
+    def play(self, standardscreen, wrong):
+        """main play function, gets user input and returns next node"""
+        while wrong.eternity < 17:
+            wrong.play(standardscreen, wrong)
+        else:
+            answer = self.prompt_input(standardscreen)
+            while answer not in ["0", "1"]:
+                answer = self.prompt_input(standardscreen)
+            else:
+                if answer == "0":
+                    while True:
+                        wrong.play(standardscreen, wrong)
+                else:
+                    wrong.spasm(standardscreen)
 
-    # def play(self, standardscreen):
-    #     """main play function displays text and returns next node"""
-    #     standardscreen.clear()
-    #     standardscreen.addstr("\n")
-    #     for i in self.query:
-    #         self.pretty_printing(i, standardscreen)
-    #         standardscreen.addstr("\n\n     ")
-    #     answer = standardscreen.getch(
-    #         standardscreen.getmaxyx()[0]-2,5)
-    #     standardscreen.refresh()
-    #     return self.answer_map["0"]
-
-    pass
 
 class WrongAnswerHandler(GameNode):
-    def __init__(self, errors, wrong):
+    def __init__(self, errors, query, options):
         self.errors = errors
-        self.wrong = wrong
+        self.wrong = 0
+        self.eternity = 0
 
-    def print_error_message(self, standardscreen):
-        if self.wrong > len(self.errors):
-            return False
-        else:
+    def play(self, standardscreen, wrong):
+        if self.wrong < len(self.errors):
             standardscreen.clear()
             standardscreen.addstr("\n ERR: Unidentified Error\n\n")
             self.pretty_printing(self.errors[self.wrong], standardscreen)
             self.wrong += 1
             standardscreen.refresh()
+            hang = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
+        else:
+            standardscreen.clear()
+            standardscreen.addstr("\n ERR: Unidentified Error\n\n")
+            standardscreen.addstr("     " + str(self.eternity))
+            self.eternity += 1
+            hang = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
+
+    def spasm(self, standardscreen):
+        standardscreen.clear()
+        standardscreen.addstr("\n ERR: Unidentified Error\n\n")
+        standardscreen.addstr("     " + str(self.eternity))
+        self.eternity += 1
+        self.spasm(standardscreen)
+
