@@ -5,8 +5,7 @@ from parts import everyword
 class GameNode(object):
     #game node object, contains text and major behaiours
 
-    def __init__(self, idnum, query, options):
-        self.idnum = idnum
+    def __init__(self, query, options):
         self.query = query
         self.options = options
         self.answer_map = {}
@@ -54,8 +53,8 @@ class GameNode(object):
         return 0
 
     def colour_lookup(self, word, standardscreen):
-        """not implemented yet - will go against nltk to get word part of 
-        speech"""
+        """goes against a nltk dictionary to get part of speech and change
+        colour accordingly"""
         try:
             part = everyword[word.strip(" ")]
             if part in ["WP", "WRB", "TO", "CC", "EX", "WDT"]:
@@ -86,6 +85,8 @@ class GameNode(object):
             return self.answer_map[answer].play(standardscreen, wrong)
 
     def prompt_input(self, standardscreen):
+        """prints the query and options using pretty printing methods, and 
+        prompts for user input"""
         standardscreen.clear()
         standardscreen.addstr("\n")
         for i in self.query:
@@ -100,8 +101,7 @@ class GameNode(object):
         return answer
 
 class NoAnswerNode(GameNode):
-    def __init__(self, idnum, query):
-        self.idnum = idnum
+    def __init__(self, query):
         self.query = query
         self.answer_map = {}
 
@@ -119,7 +119,8 @@ class NoAnswerNode(GameNode):
 
 class GameEnd(GameNode):
     def play(self, standardscreen, wrong):
-        """main play function, gets user input and returns next node"""
+        """prints errors if there are any remaining errors, and asks the final
+        ending question"""
         while wrong.eternity < 17:
             wrong.play(standardscreen, wrong)
         else:
@@ -141,6 +142,8 @@ class WrongAnswerHandler(GameNode):
         self.eternity = 0
 
     def play(self, standardscreen, wrong):
+        """prints error message if there are any remaining, and if not, prints
+        an incrementing counter"""
         if self.wrong < len(self.errors):
             standardscreen.clear()
             standardscreen.addstr("\n ERR: Unidentified Error\n\n")
@@ -156,6 +159,7 @@ class WrongAnswerHandler(GameNode):
             hang = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
 
     def spasm(self, standardscreen):
+        """calls recursive loop until throws maximum recursion depth error"""
         standardscreen.clear()
         standardscreen.addstr("\n ERR: Unidentified Error\n\n")
         standardscreen.addstr("     " + str(self.eternity))
