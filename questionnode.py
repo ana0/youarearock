@@ -3,6 +3,7 @@
 import curses
 from parts import everyword
 import time
+import random
 
 
 class GameNode(object):
@@ -136,19 +137,14 @@ class GameEnd(GameNode):
                     while True:
                         wrong.play(standardscreen, wrong)
                 else:
-                    # standardscreen.clear()
-                    # curses.flash()
-                    # curses.flash()
-                    # curses.flash()
-                    # standardscreen.addstr("TEST")
-                    # standardscreen.refresh()
-                    # time.sleep(0.5)
+                    wrong.glitch_out(standardscreen)
                     wrong.spasm(standardscreen)
 
 
 class WrongAnswerHandler(GameNode):
-    def __init__(self, errors):
+    def __init__(self, errors, glitch):
         self.errors = errors
+        self.glitch = glitch
         self.wrong = 0
         self.eternity = 0
 
@@ -177,7 +173,45 @@ class WrongAnswerHandler(GameNode):
         standardscreen.addstr("\n ERR: Unidentified Error\n\n",
             curses.color_pair(1))
         standardscreen.addstr("     " + str(self.eternity))
-        # curses.flash()
         self.eternity += 1
         self.spasm(standardscreen)
+
+    def glitch_out(self, standardscreen):
+        standardscreen.clear()
+        standardscreen.addstr("\n ERR: Unidentified Error\n\n",
+            curses.color_pair(1))
+        standardscreen.addstr("     " + str(self.eternity))
+        plain = []
+        for char in self.glitch:
+            plain.append(char)
+            if standardscreen.getyx()[1]+1 >= standardscreen.getmaxyx()[1]-5:
+                standardscreen.addstr(" \n     ")
+            else:
+                standardscreen.addstr(char)
+        standardscreen.refresh()
+        time.sleep(1)
+        while len(plain) > 0:
+            change = random.choice(plain)
+            blue_chars = []
+            blue_chars.append(change)
+            plain.remove(change)
+            standardscreen.clear()
+            standardscreen.addstr("\n ERR: Unidentified Error\n\n     ",
+                curses.color_pair(1))
+            for char in self.glitch:
+                if char in plain:
+                    if standardscreen.getyx()[1] >= standardscreen.getmaxyx()[1]-5:
+                        standardscreen.addstr(" \n     ")
+                    else:
+                        standardscreen.addstr(char)
+                elif char in blue_chars:
+                    if standardscreen.getyx()[1]+1 >= standardscreen.getmaxyx()[1]-5:
+                        standardscreen.addstr(" \n     ")
+                    else:
+                        standardscreen.addstr(char, curses.color_pair(2))
+            standardscreen.refresh()
+            time.sleep(.01)
+        time.sleep(.5)
+
+
 

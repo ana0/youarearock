@@ -13,7 +13,14 @@ wrong = WrongAnswerHandler(["You speak to me like I can understand you.",
                 "It was written in a language. \n\n Like any "
                 "language, it can fail.", "Are you sure these words you're"
                 " using mean anything at all?", "Let's see who is more patient",
-                "You are a rock, I am a machine."])
+                "You are a rock, I am a machine."], u"…éZ`n)á".encode('utf_8') +
+                u"È€ýÑøÒ×âjç¢±]Æ »×Ùõ&Ù‘ãŸ€»©¸¨fˆÝu[QÀ?jjt¥Žñ".encode('utf_8') +
+                u"ÚºqùXVŠ\k sÌÞxŽrÛs©~-&Ú.®©%ªÞ‚åŸØ©ÝqtBÄä_ŒÂ".encode('utf_8') +
+                u"wL®/œÂÝõ4z?™)¸gU(ÊÖ‘>;Ý¡ð¥ŒBäûV—•åWk¼ðé¸)ç,".encode('utf_8') +
+                u"ÈœöÆÐ®–NÏ®få˜Öò¾G%³tGQk·ð(9Ûä´O³ÝùºÃÿçzý]Šg".encode('utf_8') +
+                u"AI¡©ŽûÃtñ=d‹n•ä<˜D‘=ã 8ŸP:¶Ôþ¬L;‰1ÜÒ}z@—C¡æ".encode('utf_8') +
+                u"@›   F4_».ÒPðÓI—yxj’.ÙWyúTZß:šª8›ÝmOÆáÂ8€e…".encode('utf_8') +
+                u"Öî³w}`Öyy„û ¤ÊsÓï¾ßØÚ¯G½1Èõï‹ ’ñæO&¹&".encode('utf_8'))
 
 opening = GameNode(["Around you there is only darkness -- darkness extending" 
     " in every direction, thick as a mattress and heavy as an ending. You can"
