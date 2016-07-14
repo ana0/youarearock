@@ -211,6 +211,7 @@ class WrongAnswerHandler(GameNode):
                         standardscreen.addstr(char, curses.color_pair(2))
             standardscreen.refresh()
             time.sleep(.01)
+            curses.flash()
         time.sleep(.5)
 
 
