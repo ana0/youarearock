@@ -1,5 +1,8 @@
+# coding: utf-8
+
 import curses
 from parts import everyword
+import time
 
 
 class GameNode(object):
@@ -132,6 +135,13 @@ class GameEnd(GameNode):
                     while True:
                         wrong.play(standardscreen, wrong)
                 else:
+                    # standardscreen.clear()
+                    # curses.flash()
+                    # curses.flash()
+                    # curses.flash()
+                    # standardscreen.addstr("TEST")
+                    # standardscreen.refresh()
+                    # time.sleep(0.5)
                     wrong.spasm(standardscreen)
 
 
@@ -146,14 +156,16 @@ class WrongAnswerHandler(GameNode):
         an incrementing counter"""
         if self.wrong < len(self.errors):
             standardscreen.clear()
-            standardscreen.addstr("\n ERR: Unidentified Error\n\n")
+            standardscreen.addstr("\n ERR: Unidentified Error\n\n",
+                curses.color_pair(1))
             self.pretty_printing(self.errors[self.wrong], standardscreen)
             self.wrong += 1
             standardscreen.refresh()
             hang = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
         else:
             standardscreen.clear()
-            standardscreen.addstr("\n ERR: Unidentified Error\n\n")
+            standardscreen.addstr("\n ERR: Unidentified Error\n\n",
+                curses.color_pair(1))
             standardscreen.addstr("     " + str(self.eternity))
             self.eternity += 1
             hang = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
@@ -161,8 +173,10 @@ class WrongAnswerHandler(GameNode):
     def spasm(self, standardscreen):
         """calls recursive loop until throws maximum recursion depth error"""
         standardscreen.clear()
-        standardscreen.addstr("\n ERR: Unidentified Error\n\n")
+        standardscreen.addstr("\n ERR: Unidentified Error\n\n",
+            curses.color_pair(1))
         standardscreen.addstr("     " + str(self.eternity))
+        # curses.flash()
         self.eternity += 1
         self.spasm(standardscreen)
 
