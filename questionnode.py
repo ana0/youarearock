@@ -98,8 +98,9 @@ class GameNode(object):
         for i in self.options:
             self.pretty_printing(i, standardscreen)
             standardscreen.addstr("\n     ")
+        standardscreen.addstr(standardscreen.getmaxyx()[0]-2,5,"$ ")
         answer = standardscreen.getstr(
-            standardscreen.getmaxyx()[0]-2,5).decode(encoding = "utf-8")
+            standardscreen.getmaxyx()[0]-2,7).decode(encoding = "utf-8")
         standardscreen.refresh()
         return answer
 
