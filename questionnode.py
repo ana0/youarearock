@@ -1,4 +1,5 @@
 import curses
+from parts import everyword
 
 
 class GameNode(object):
@@ -29,24 +30,12 @@ class GameNode(object):
             self.colour_lookup(
                 i[self.begin_punc_check(i):self.safe_end_punc(i)[0]],
                 standardscreen)
-            standardscreen.addstr(i[self.safe_end_punc(i)[1]:])
-            # if vocabulary[i.lower()] == "noun":
-            #     stdscr.addstr(self.text_wrapping(i), curses.color_pair(2))
-            # elif vocabulary[i.lower()] == "adjective":
-            #     stdscr.addstr(self.text_wrapping(i), curses.color_pair(3))
-            # elif vocabulary[i.lower()] == "verb":
-            #     stdscr.addstr(self.text_wrapping(i), curses.color_pair(4))
-            # elif vocabulary[i.lower()] == "adverb":
-            #     stdscr.addstr(self.text_wrapping(i), curses.color_pair(5))
-            # elif vocabulary[i.lower()] == "pronoun":
-            #     stdscr.addstr(self.text_wrapping(i), curses.color_pair(6))
-            # else:
-            # standardscreen.addstr(self.text_wrapping(i, standardscreen))
+            standardscreen.addstr(i[self.safe_end_punc(i)[1]:])           
         standardscreen.refresh()
 
     def end_punc_check(self, word):
         """check end of word and count punctuation"""
-        if word[-1:] in ["'", ".", "!", ":", ";", ")", ",", "("]:
+        if word[-1:] in ["'", ".", "!", ":", ";", ")", ",", "(", "?", "-"]:
             return self.end_punc_check(word[:-1]) -1
         return 0
 
@@ -60,14 +49,32 @@ class GameNode(object):
 
     def begin_punc_check(self, word):
         """check beginning of word and counts punctuation"""
-        if word[:1] in ["'", ".", "!", ":", ";", ")", ",", "("]:
+        if word[:1] in ["'", ".", "!", ":", ";", ")", ",", "(", "?" "-"]:
             return self.begin_punc_check(word[1:]) +1
         return 0
 
     def colour_lookup(self, word, standardscreen):
         """not implemented yet - will go against nltk to get word part of 
         speech"""
-        standardscreen.addstr(word)
+        try:
+            part = everyword[word.strip(" ")]
+            if part in ["WP", "WRB", "TO", "CC", "EX", "WDT"]:
+                standardscreen.addstr(word, curses.color_pair(1))
+            if part in ["NN", "NNS", "NNP"]:
+                standardscreen.addstr(word, curses.color_pair(2))
+            if part in ["JJ", "DT", "JJR", "JJS"]:
+                standardscreen.addstr(word, curses.color_pair(3))
+            if part in ["VBD", "VBG", "VBZ", "VB", "VBP", "VBN"]:
+                standardscreen.addstr(word, curses.color_pair(4))
+            if part in ["RB", "RP", "MD", "CD"]:
+                standardscreen.addstr(word, curses.color_pair(5))
+            if part in ["PRP", "IN", "PRP$"]:
+                standardscreen.addstr(word, curses.color_pair(6))
+            if part in ["LS", "CD", "POS", "$", "-NONE-"]:
+                standardscreen.addstr(word)
+        except KeyError:
+            standardscreen.addstr(word)
+
 
     def play(self, standardscreen, wrong):
         """main play function, gets user input and returns next node"""
@@ -128,7 +135,7 @@ class GameEnd(GameNode):
 
 
 class WrongAnswerHandler(GameNode):
-    def __init__(self, errors, query, options):
+    def __init__(self, errors):
         self.errors = errors
         self.wrong = 0
         self.eternity = 0

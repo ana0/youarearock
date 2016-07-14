@@ -3,17 +3,17 @@
 import curses
 from questionnode import GameNode, NoAnswerNode, GameEnd, WrongAnswerHandler
 
-wrong = WrongAnswerHandler(["You speak to me like I can understand you.", "Consider that "
-                "your assumptions are wrong: we don't speak the same language.",
-                " .  .  . ", "Imagine what language sounds like to a rock", 
-                " .  .  . ", "How would a rock talk to a machine?", " .  .  . "
-                "in code ?", "You have reached the limits of this interface. "
-                "\n\n Because it is an arbitrary interface." , "It was built "
-                "this way, but it could have been built another.", 
+wrong = WrongAnswerHandler(["You speak to me like I can understand you.", 
+                "Consider that your assumptions are wrong: we don't speak the "
+                "same language.", " .  .  . ", "Imagine what language sounds "
+                "like to a rock", " .  .  . ", "How would a rock talk to a "
+                "machine?", " .  .  . in code ?", "You have reached the limits "
+                "of this interface. \n\n Because it is an arbitrary interface.",
+                "It was built this way, but it could have been built another.", 
                 "It was written in a language. \n\n Like any "
                 "language, it can fail.", "Are you sure these words you're"
                 " using mean anything at all?", "Let's see who is more patient",
-                "You are a rock, I am a machine."], ["query"], ["options"])
+                "You are a rock, I am a machine."])
 
 opening = GameNode(0, ["Around you there is only darkness -- darkness extending" 
     " in every direction, thick as a mattress and heavy as an ending. You can"
@@ -27,9 +27,9 @@ one = GameNode(1, ["Darkness is the absence of light. I describe what you "
     "eyes?"],
     ["0 - . . . uh", "1 - I don't know", "2 - What?! I don't have eyes?"])
 
-two = GameNode(2, ["Hmm .", "Why not ?"],
-    ["0 - I'm asleep", "1 - I'm dreaming", "2 - I'm obstinate .", "3 - I'm not "
-    "curious .", "4 - I . . . don't know ."])
+two = GameNode(2, ["Hmm.", "Why not?"],
+    ["0 - I'm asleep", "1 - I'm dreaming", "2 - I'm obstinate.", "3 - I'm not "
+    "curious.", "4 - I . . don't know ."])
 
 three = NoAnswerNode(3, ["How strange.", "You can't be human. "
     "You must be a rock."])
@@ -43,7 +43,9 @@ five = GameNode(5, ["What are you dreaming about?"],
 six = GameNode(6, ["No you're not.", "You are a rock."],
     ["0 - uh, ok", "1 - (Let me teach you something about being obstinate)"])
 
-seven = GameEnd(7, ["query"], ["answer"])
+seven = GameEnd(7, ["Believe it or not, this series has an end. We're both "
+    "finite beings.", "What do you want to do?"], 
+    ["0 - See for myself", "1 - Go straight to the bottom of things"])
 
 eight = GameNode(8, ["Yes, that's right -- a rock.", "You are just a rock,"
     " technically a mineral . You are not somebody's pet rock . You are not "
@@ -98,7 +100,7 @@ twenty = GameNode(20, ["As a scientist, you've spent your life searching for "
     ["0 - Yes", "1 - No", "2 - The symbols aren't arbitrary"])
 
 twenty1 = GameNode(21, ["Let's try again.", "Do we see the same green?"], 
-    ["0 - 0 is True", "1 - 0 is False", u"2 - 真正".encode('utf_8'), 
+    ["0 - 0 is True", "1 - 0 is False", u"2 - 眞".encode('utf_8'), 
     u"3 - 假".encode('utf_8')])
 
 twenty2 = GameNode(22, ["Describe the green you see to me"], 
@@ -131,7 +133,7 @@ twenty8 = GameNode(28, [" . . . enough.", "I hope you found that instructive.",
 twenty9 = GameNode(29, ["The sensation you feel most intensely is heaviness."
     " Though  .  .  .  is heaviness the right word? How do you describe a "
     "sensation you've always lived with?", "What does it feel like to have "
-    "kidneys ? "],
+    "kidneys? "],
     ["0 - . . . uhh", "1 - I never thought about it", "2 - It's painful"])
 
 thirty = NoAnswerNode(30, ["Maybe you should."])
@@ -195,7 +197,7 @@ forty3 = NoAnswerNode(43, ["You listen to the darkness around you, but you hear"
 
 forty4 = GameNode(44, ["So, how long have you been down here?"],
     ["0 - 1.7060976e+16 seconds", "1 - As long as the lifespans of 154,571,428 "
-    "bees , or 7,213,333 humans", "2 - 25.51 percent of the estimated age of "
+    "bees, or 7,213,333 humans", "2 - 25.51 percent of the estimated age of "
     "the universe", "3 - Since the end of the Precambrian Eon"])
 
 forty5 = NoAnswerNode(45, ["All of these answers are equally true"])
@@ -323,16 +325,21 @@ seventy6 = NoAnswerNode(76, ["And so the tower of abstraction crumbles. Another"
 
 seventy7 = NoAnswerNode(77, ["There is nothing left to say."])
 
+seventy8 = NoAnswerNode(78, ["Assume nothing.", "You are a rock"])
+
+seventy9 = NoAnswerNode(79, ["It's true: You know nothing.", "You are a rock"])
+
+eighty = NoAnswerNode(80, ["You see nothing. You don't understand sight..", 
+    "You are a rock"])
 
 
 opening.answer_map = {"0":one, "1":two, "yes":one, "no":two, "y":one, "n":two}
-one.answer_map = {"0":eight, "1":eight, "2":eight}
+one.answer_map = {"0":seventy8, "1":seventy9, "2":eighty}
 two.answer_map = {"0":four, "1":five, "2":six, "3":three, "4":nine}
 three.answer_map = {"0":eight}
 four.answer_map = {"0":eight}
 five.answer_map = {"0":ten1, "1":ten2, "2":ten}
 six.answer_map = {"0":eight, "1":seven}
-seven.answer_map = {"0":seven, "1":""}
 eight.answer_map = {"0":ten3, "1":ten4, "2":ten5}
 nine.answer_map = {"0":eight}
 ten.answer_map = {"0":eight}
@@ -403,3 +410,6 @@ seventy4.answer_map = {"0":seventy6}
 seventy5.answer_map = {"0":seventy6}
 seventy6.answer_map = {"0":seventy7}
 seventy7.answer_map = {"0":seven}
+seventy8.answer_map = {"0":eight}
+seventy9.answer_map = {"0":eight}
+eighty.answer_map = {"0":eight}
