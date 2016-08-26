@@ -50,8 +50,8 @@ five = GameNode(["What are you dreaming about?"],
 six = GameNode(["No you're not.", "You are a rock."],
     ["0 - uh, ok", "1 - (Let me teach you something about being obstinate)"])
 
-seven = GameEnd(["Believe it or not, this series has an end. We're both "
-    "finite beings.", "What do you want to do?"], 
+seven = GameEnd(["Believe it or not, this series has an end. Everything is "
+    "finite.", "What do you want to do?"], 
     ["0 - See for myself", "1 - Go straight to the bottom of things"])
 
 eight = GameNode(["Yes, that's right -- a rock.", "You are just a rock,"
@@ -304,7 +304,7 @@ sixty9= NoAnswerNode(["Of course. Who talks this long to a rock that isn't "
 seventy = NoAnswerNode(["And by your ignorance you are implicated."])
 
 seventy1 = NoAnswerNode(["Perhaps you'll mine pixellated blocks "
-    "entertaining children.", "Or you may you'll perform hours of pointless "
+    "entertaining children.", "Or you'll perform hours of pointless "
     "mathematics, checking cryptographic hashes. Another type of block - this "
     "one becomes money and entertains adults."])
 

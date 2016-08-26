@@ -204,13 +204,12 @@ class WrongAnswerHandler(GameNode):
                         standardscreen.addstr(" \n     ")
                     else:
                         standardscreen.addstr(char)
-                elif char in blue_chars:
+                else:
                     if standardscreen.getyx()[1]+1 >= standardscreen.getmaxyx()[1]-5:
                         standardscreen.addstr(" \n     ")
                     else:
                         standardscreen.addstr(char, curses.color_pair(2))
             standardscreen.refresh()
-            time.sleep(.01)
             curses.flash()
         time.sleep(.5)
 
