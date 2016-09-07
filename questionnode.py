@@ -69,7 +69,7 @@ class GameNode(object):
                 standardscreen.addstr(word, curses.color_pair(3))
             if part in ["VBD", "VBG", "VBZ", "VB", "VBP", "VBN"]:
                 standardscreen.addstr(word, curses.color_pair(4))
-            if part in ["RB", "RP", "MD", "CD"]:
+            if part in ["RB", "RP", "MD"]:
                 standardscreen.addstr(word, curses.color_pair(5))
             if part in ["PRP", "IN", "PRP$"]:
                 standardscreen.addstr(word, curses.color_pair(6))
