@@ -6,6 +6,10 @@ import time
 import random
 
 
+#global state variable is used to track game state for meta-game functions like
+#rpg and command line tricks
+state = ""
+
 class GameNode(object):
     #game node object, contains text and major behaiours
 
@@ -81,11 +85,13 @@ class GameNode(object):
 
     def play(self, standardscreen, wrong):
         """main play function, gets user input and returns next node"""
+        global state
         answer = self.prompt_input(standardscreen)
         while not answer in self.answer_map:
             wrong.play(standardscreen, wrong)
             answer = self.prompt_input(standardscreen)
         else:
+            state = self.answer_map[answer]
             return self.answer_map[answer].play(standardscreen, wrong)
 
     def prompt_input(self, standardscreen):
@@ -112,6 +118,7 @@ class NoAnswerNode(GameNode):
 
     def play(self, standardscreen, wrong):
         """main play function displays text and returns next node"""
+        global state
         standardscreen.clear()
         standardscreen.addstr("\n")
         for i in self.query:
@@ -120,6 +127,7 @@ class NoAnswerNode(GameNode):
         answer = standardscreen.getch(
             standardscreen.getmaxyx()[0]-2,5)
         standardscreen.refresh()
+        state = self.answer_map["0"]
         return self.answer_map["0"].play(standardscreen, wrong)
 
 class GameEnd(GameNode):
