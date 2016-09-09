@@ -49,6 +49,7 @@ trick = TrickHandler({"whoami": "That's a very good question: you have no name."
     "sleep": "Take as long as you need",
     "think": "Take as long as you need",
     "shift": "Enter",
+    "listen": "At the moment, you hear nothing",
     "why": "Be patient, we'll get there eventually",
     "who": "'who' doesn't matter"})
 

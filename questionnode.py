@@ -230,7 +230,7 @@ class WrongAnswerHandler(GameNode):
 class TrickHandler(GameNode):
     def __init__(self, statements):
         self.statements = statements
-        self.funcs = {"listen": self.listen, "pwd": self.pwd, "ls": self.ls, 
+        self.funcs = {"pwd": self.pwd, "ls": self.ls, 
             "kill": self.kill, "logout": self.logout, "echo": self.echo, "sudo":
             self.sudo}
         self.tricks = self.tuple_constructor()
@@ -259,9 +259,6 @@ class TrickHandler(GameNode):
         answer = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
         standardscreen.refresh()
         state.play(standardscreen, wrong, trick)
-
-    def listen(self, standardscreen, wrong, trick, answer):
-        pass
 
     def pwd(self, standardscreen, wrong, trick, answer):
         home = os.getcwd()
