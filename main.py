@@ -5,11 +5,6 @@ import time
 import locale
 
 questionnode.state = opening
-questionnode.tricks_dict = tricks
-questionnode.tricks_list = [trick for trick in questionnode.tricks_dict]
-questionnode.tricks_list = tuple(questionnode.tricks_list)
-questionnode.trick_funcs = trick_funcs
-
 
 def run(stdscr):
     curses.echo()
@@ -20,7 +15,7 @@ def run(stdscr):
     curses.init_pair(5, curses.COLOR_YELLOW, curses.COLOR_BLACK)
     curses.init_pair(6, curses.COLOR_GREEN, curses.COLOR_BLACK)
     
-    next_node = questionnode.state.play(stdscr, wrong)
+    next_node = questionnode.state.play(stdscr, wrong, trick)
 
     time.sleep(5)
 

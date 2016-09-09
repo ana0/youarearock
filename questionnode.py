@@ -9,9 +9,6 @@ import random
 #global state variable is used to track game state for meta-game functions like
 #rpg and command line tricks
 state = ""
-tricks_dict = {}
-tricks_list = ()
-trick_funcs = ()
 
 class GameNode(object):
     #game node object, contains text and major behaiours
@@ -88,30 +85,19 @@ class GameNode(object):
             standardscreen.addstr(word)
 
 
-    def play(self, standardscreen, wrong):
+    def play(self, standardscreen, wrong, trick):
         """main play function, gets user input and returns next node"""
         global state
         answer = self.prompt_input(standardscreen)
         while not answer in self.answer_map:
-            if answer.startswith(tricks_list):
-                self.trick_handler(standardscreen, wrong, answer)
+            if answer.startswith(trick.tricks):
+                trick.play(standardscreen, wrong, trick, answer)
             else:
-                wrong.play(standardscreen, wrong)
+                wrong.play(standardscreen, wrong, trick)
                 answer = self.prompt_input(standardscreen)
         else:
             state = self.answer_map[answer]
-            return self.answer_map[answer].play(standardscreen, wrong)
-
-    def trick_handler(self, standardscreen, wrong, trick):
-        """prints tricks, then pops player back to global gmae state"""
-        global state
-        standardscreen.clear()
-        standardscreen.addstr("\n")
-        self.pretty_printing(tricks_dict[trick], standardscreen)
-        answer = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
-        standardscreen.refresh()
-        state.play(standardscreen, wrong)
-
+            return self.answer_map[answer].play(standardscreen, wrong, trick)
 
     def prompt_input(self, standardscreen):
         """prints the query and options using pretty printing methods, and 
@@ -135,7 +121,7 @@ class NoAnswerNode(GameNode):
         self.query = query
         self.answer_map = {}
 
-    def play(self, standardscreen, wrong):
+    def play(self, standardscreen, wrong, trick):
         """main play function displays text and returns next node"""
         global state
         standardscreen.clear()
@@ -147,14 +133,14 @@ class NoAnswerNode(GameNode):
             standardscreen.getmaxyx()[0]-2,5)
         standardscreen.refresh()
         state = self.answer_map["0"]
-        return self.answer_map["0"].play(standardscreen, wrong)
+        return self.answer_map["0"].play(standardscreen, wrong, trick)
 
 class GameEnd(GameNode):
-    def play(self, standardscreen, wrong):
+    def play(self, standardscreen, wrong, trick):
         """prints errors if there are any remaining errors, and asks the final
         ending question"""
         while wrong.eternity < 17:
-            wrong.play(standardscreen, wrong)
+            wrong.play(standardscreen, wrong, trick)
         else:
             answer = self.prompt_input(standardscreen)
             while answer not in ["0", "1"]:
@@ -162,7 +148,7 @@ class GameEnd(GameNode):
             else:
                 if answer == "0":
                     while True:
-                        wrong.play(standardscreen, wrong)
+                        wrong.play(standardscreen, wrong, tricks_dict)
                 else:
                     wrong.glitch_out(standardscreen)
                     wrong.spasm(standardscreen)
@@ -175,7 +161,7 @@ class WrongAnswerHandler(GameNode):
         self.wrong = 0
         self.eternity = 0
 
-    def play(self, standardscreen, wrong):
+    def play(self, standardscreen, wrong, trick):
         """prints error message if there are any remaining, and if not, prints
         an incrementing counter"""
         if self.wrong < len(self.errors):
@@ -241,12 +227,36 @@ class WrongAnswerHandler(GameNode):
         time.sleep(.5)
 
 class TrickHandler(GameNode):
-    def __init__(tricks):
-        self.tricks = tricks
+    def __init__(self, statements):
+        self.statements = statements
+        self.funcs = {"listen": self.listen, "pwd": self.pwd, "ls": self.ls, 
+            "kill": self.kill, "logout": self.logout, "echo": self.echo}
+        self.tricks = self.tuple_constructor()
         self.answer_map = {}
 
-    def play(self, standardscreen, wrong, trick):
-        pass
+    def play(self, standardscreen, wrong, trick, answer):
+        for i in self.tricks:
+            if answer.startswith(i):
+                answer = i
+        if answer in self.statements:
+            self.statement_handler(standardscreen, wrong, trick, answer)
+        else: 
+            self.funcs[answer]()
+
+    def tuple_constructor(self):
+        all_tricks = [i for i in self.statements] + [i for i in 
+            self.funcs]
+        return tuple(all_tricks)
+
+    def statement_handler(self, standardscreen, wrong, trick, answer):
+        """prints tricks, then pops player back to global gmae state"""
+        global state
+        standardscreen.clear()
+        standardscreen.addstr("\n")
+        self.pretty_printing(self.statements[answer], standardscreen)
+        answer = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
+        standardscreen.refresh()
+        state.play(standardscreen, wrong, trick)
 
     def listen():
         pass
@@ -261,25 +271,25 @@ class TrickHandler(GameNode):
         self.pretty_printing(lol, standardscreen)
         answer = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
         standardscreen.refresh()
-        answer_map["0"].play(standardscreen, wrong)
+        answer_map["0"].play(standardscreen, wrong, trick)
 
     def ls():
         pass
 
-    def kill():
-        kill = "Maybe I underestimated you. You seem to have learned how"
-            " things work very quickly. Maybe too quickly.\n\n     Of "
-            "course you would have this power."
+    def kill(self, standardscreen, wrong, trick):
+        kill = ("Maybe I underestimated you. You seem to have learned how" 
+                " things work very quickly. Maybe too quickly.\n\n     Of " 
+                "course you would have this power.")
         standardscreen.clear()
         standardscreen.addstr("\n")
         self.pretty_printing(kill, standardscreen)
         answer = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
         standardscreen.refresh()
-        answer_map["0"].play(standardscreen, wrong)
+        answer_map["0"].play(standardscreen, wrong, trick)
 
     def logout():
         standardscreen.clear()
-        answer_map["0"].play(standardscreen, wrong)
+        answer_map["0"].play(standardscreen, wrong, trick)
 
     def echo():
         pass

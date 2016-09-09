@@ -1,9 +1,11 @@
 # coding: utf-8
 
 import curses
-from questionnode import GameNode, NoAnswerNode, GameEnd, WrongAnswerHandler
+from questionnode import *
 
-tricks = {"whoami": "That's a very good question: you have no name. You are a rock",
+
+trick = TrickHandler({"whoami": "That's a very good question: you have no name."
+    " You are a rock",
     "cd": "You think you can get away that easily?",
     "exit": "You think you can get away that easily?",
     "rm": "Permission denied",
@@ -46,12 +48,9 @@ tricks = {"whoami": "That's a very good question: you have no name. You are a ro
     "save": "No one can save you",
     "sleep": "Take as long as you need",
     "think": "Take as long as you need",
-    "shift": "Enter"
-    "why": "Who can say where the wind blows. Where the day goes"}
+    "shift": "Enter",
+    "why": "Who can say where the wind blows. Where the day goes"})
 
-tricks_funcs = ("listen", "pwd", "sudo", "ls", "kill", "logout", "echo")
-
-trick = TrickHandler(tricks_funcs)
 
 wrong = WrongAnswerHandler(["You speak to me like I can understand you.", 
                 "Consider that your assumptions are wrong: we don't speak the "
