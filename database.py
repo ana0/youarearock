@@ -49,8 +49,8 @@ trick = TrickHandler({"whoami": "That's a very good question: you have no name."
     "sleep": "Take as long as you need",
     "think": "Take as long as you need",
     "shift": "Enter",
-    "why": "Who can say where the wind blows. Where the day goes"})
-
+    "why": "Be patient, we'll get there eventually",
+    "who": "'who' doesn't matter"})
 
 wrong = WrongAnswerHandler(["You speak to me like I can understand you.", 
                 "Consider that your assumptions are wrong: we don't speak the "

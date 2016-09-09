@@ -4,6 +4,7 @@ import curses
 from parts import everyword
 import time
 import random
+import os
 
 
 #global state variable is used to track game state for meta-game functions like
@@ -259,11 +260,16 @@ class TrickHandler(GameNode):
         standardscreen.refresh()
         state.play(standardscreen, wrong, trick)
 
-    def listen(self):
+    def listen(self, standardscreen, wrong, trick, answer):
         pass
 
-    def pwd(self):
-        pass
+    def pwd(self, standardscreen, wrong, trick, answer):
+        home = os.getcwd()
+        standardscreen.clear()
+        standardscreen.addstr("\n     " + home)
+        answer = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
+        standardscreen.refresh()
+        state.play(standardscreen, wrong, trick)
 
     def sudo(self):
         lol = "You think you're clever but really you're a rock"
@@ -274,8 +280,14 @@ class TrickHandler(GameNode):
         standardscreen.refresh()
         self.answer_map["0"].play(standardscreen, wrong, trick)
 
-    def ls(self):
-        pass
+    def ls(self, standardscreen, wrong, trick, answer):
+        files = os.listdir(os.getcwd())
+        standardscreen.clear()
+        for f in files:
+            standardscreen.addstr("\n     " + f)
+        answer = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
+        standardscreen.refresh()
+        state.play(standardscreen, wrong, trick)
 
     def kill(self, standardscreen, wrong, trick, answer):
         kill = ("Maybe I underestimated you. You seem to have learned how" 
