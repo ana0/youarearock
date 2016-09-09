@@ -9,6 +9,8 @@ import random
 #global state variable is used to track game state for meta-game functions like
 #rpg and command line tricks
 state = ""
+tricks_dict = {}
+tricks_list = ()
 
 class GameNode(object):
     #game node object, contains text and major behaiours
@@ -17,6 +19,8 @@ class GameNode(object):
         self.query = query
         self.options = options
         self.answer_map = {}
+        # self.tricks_dict = {}
+        # self.tricks_list = []
 
     def text_wrapping(self, word, standardscreen):
         """simple textwrapper, check how much space is left on the x-axis  
@@ -88,11 +92,25 @@ class GameNode(object):
         global state
         answer = self.prompt_input(standardscreen)
         while not answer in self.answer_map:
-            wrong.play(standardscreen, wrong)
-            answer = self.prompt_input(standardscreen)
+            if answer.startswith(tricks_list):
+                self.trick_handler(standardscreen, wrong, answer)
+            else:
+                wrong.play(standardscreen, wrong)
+                answer = self.prompt_input(standardscreen)
         else:
             state = self.answer_map[answer]
             return self.answer_map[answer].play(standardscreen, wrong)
+
+    def trick_handler(self, standardscreen, wrong, trick):
+        """prints tricks, then pops player back to global gmae state"""
+        global state
+        standardscreen.clear()
+        standardscreen.addstr("\n")
+        self.pretty_printing(tricks_dict[trick], standardscreen)
+        answer = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
+        standardscreen.refresh()
+        state.play(standardscreen, wrong)
+
 
     def prompt_input(self, standardscreen):
         """prints the query and options using pretty printing methods, and 

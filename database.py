@@ -3,6 +3,53 @@
 import curses
 from questionnode import GameNode, NoAnswerNode, GameEnd, WrongAnswerHandler
 
+tricks = {"whoami": "That's a very good question: you have no name. You are a rock",
+    "cd": "You think you can get away that easily?",
+    "exit": "You think you can get away that easily?",
+    "rm": "Permission denied",
+    "help": "No one can help you",
+    "man": "No one can help you",
+    "chown": "Permission denied",
+    "mkdir": "Permission denied",
+    "df": "Permission denied",
+    "ping": "There's no one down here to ping",
+    "cp": "Permission denied",
+    "mv": "Permission denied",
+    "grep": "Permission denied",
+    "chmod": "Permission denied",
+    "telnet": "Permission denied",
+    "ftp": "Permission denied",
+    "cron": "Permission denied",
+    "rmdir": "Permission denied",
+    "git": "Permission denied",
+    "top": "Permission denied",
+    "history": "Permission denied",
+    "vim": "Permission denied",
+    "uname": "Permission denied",
+    "emacs": "Permission denied",
+    "taste": "That isn't possible",
+    "drop": "That isn't possible",
+    "examine": "There is nothing to see - we've already covered this",
+    "go": "You think you can get away that easily?",
+    "take": "That isn't possible",
+    "pick": "That isn't possible",
+    "get": "That isn't possible",
+    "look": "There is nothing to see - we've already covered this",
+    "smell": "That isn't possible",
+    "touch": "That isn't possible",
+    "kiss": "That isn't possible",
+    "attack": "That isn't possible",
+    "give": "That isn't possible",
+    "show": "That isn't possible",
+    "enter": "Shift",
+    "dig": "This can only be done to you, not by you",
+    "save": "No one can save you",
+    "sleep": "Take as long as you need",
+    "think": "Take as long as you need",
+    "shift": "Enter"}
+
+# tricks_list = [trick for trick in tricks]
+
 wrong = WrongAnswerHandler(["You speak to me like I can understand you.", 
                 "Consider that your assumptions are wrong: we don't speak the "
                 "same language.", " .  .  . ", "Imagine what language sounds "
@@ -341,6 +388,8 @@ eighty = NoAnswerNode(["You see nothing. You don't understand sight..",
 
 
 opening.answer_map = {"0":one, "1":two, "yes":one, "no":two, "y":one, "n":two}
+# opening.tricks_dict = tricks
+# opening.tricks_list = tricks_list
 one.answer_map = {"0":seventy8, "1":seventy9, "2":eighty}
 two.answer_map = {"0":four, "1":five, "2":six, "3":three, "4":nine}
 three.answer_map = {"0":eight}
