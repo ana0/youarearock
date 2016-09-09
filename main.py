@@ -8,6 +8,7 @@ questionnode.state = opening
 questionnode.tricks_dict = tricks
 questionnode.tricks_list = [trick for trick in questionnode.tricks_dict]
 questionnode.tricks_list = tuple(questionnode.tricks_list)
+questionnode.trick_funcs = trick_funcs
 
 
 def run(stdscr):

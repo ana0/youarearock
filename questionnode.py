@@ -11,6 +11,7 @@ import random
 state = ""
 tricks_dict = {}
 tricks_list = ()
+trick_funcs = ()
 
 class GameNode(object):
     #game node object, contains text and major behaiours
@@ -148,8 +149,6 @@ class NoAnswerNode(GameNode):
         state = self.answer_map["0"]
         return self.answer_map["0"].play(standardscreen, wrong)
 
-
-
 class GameEnd(GameNode):
     def play(self, standardscreen, wrong):
         """prints errors if there are any remaining errors, and asks the final
@@ -240,6 +239,50 @@ class WrongAnswerHandler(GameNode):
             standardscreen.refresh()
             curses.flash()
         time.sleep(.5)
+
+class TrickHandler(GameNode):
+    def __init__(tricks):
+        self.tricks = tricks
+        self.answer_map = {}
+
+    def play(self, standardscreen, wrong, trick):
+        pass
+
+    def listen():
+        pass
+
+    def pwd():
+        pass
+
+    def sudo():
+        lol = "You think you're clever but really you're a rock"
+        standardscreen.clear()
+        standardscreen.addstr("\n")
+        self.pretty_printing(lol, standardscreen)
+        answer = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
+        standardscreen.refresh()
+        answer_map["0"].play(standardscreen, wrong)
+
+    def ls():
+        pass
+
+    def kill():
+        kill = "Maybe I underestimated you. You seem to have learned how"
+            " things work very quickly. Maybe too quickly.\n\n     Of "
+            "course you would have this power."
+        standardscreen.clear()
+        standardscreen.addstr("\n")
+        self.pretty_printing(kill, standardscreen)
+        answer = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
+        standardscreen.refresh()
+        answer_map["0"].play(standardscreen, wrong)
+
+    def logout():
+        standardscreen.clear()
+        answer_map["0"].play(standardscreen, wrong)
+
+    def echo():
+        pass
 
 
 

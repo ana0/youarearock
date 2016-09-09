@@ -46,9 +46,12 @@ tricks = {"whoami": "That's a very good question: you have no name. You are a ro
     "save": "No one can save you",
     "sleep": "Take as long as you need",
     "think": "Take as long as you need",
-    "shift": "Enter"}
+    "shift": "Enter"
+    "why": "Who can say where the wind blows. Where the day goes"}
 
-# tricks_list = [trick for trick in tricks]
+tricks_funcs = ("listen", "pwd", "sudo", "ls", "kill", "logout", "echo")
+
+trick = TrickHandler(tricks_funcs)
 
 wrong = WrongAnswerHandler(["You speak to me like I can understand you.", 
                 "Consider that your assumptions are wrong: we don't speak the "
@@ -388,8 +391,6 @@ eighty = NoAnswerNode(["You see nothing. You don't understand sight..",
 
 
 opening.answer_map = {"0":one, "1":two, "yes":one, "no":two, "y":one, "n":two}
-# opening.tricks_dict = tricks
-# opening.tricks_list = tricks_list
 one.answer_map = {"0":seventy8, "1":seventy9, "2":eighty}
 two.answer_map = {"0":four, "1":five, "2":six, "3":three, "4":nine}
 three.answer_map = {"0":eight}
@@ -469,3 +470,4 @@ seventy7.answer_map = {"0":seven}
 seventy8.answer_map = {"0":eight}
 seventy9.answer_map = {"0":eight}
 eighty.answer_map = {"0":eight}
+trick.answer_map = {"0":seven}
