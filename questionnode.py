@@ -148,7 +148,7 @@ class GameEnd(GameNode):
             else:
                 if answer == "0":
                     while True:
-                        wrong.play(standardscreen, wrong, tricks_dict)
+                        wrong.play(standardscreen, wrong, trick)
                 else:
                     wrong.glitch_out(standardscreen)
                     wrong.spasm(standardscreen)
@@ -230,18 +230,19 @@ class TrickHandler(GameNode):
     def __init__(self, statements):
         self.statements = statements
         self.funcs = {"listen": self.listen, "pwd": self.pwd, "ls": self.ls, 
-            "kill": self.kill, "logout": self.logout, "echo": self.echo}
+            "kill": self.kill, "logout": self.logout, "echo": self.echo, "sudo":
+            self.sudo}
         self.tricks = self.tuple_constructor()
         self.answer_map = {}
 
     def play(self, standardscreen, wrong, trick, answer):
         for i in self.tricks:
             if answer.startswith(i):
-                answer = i
+                key = i
         if answer in self.statements:
-            self.statement_handler(standardscreen, wrong, trick, answer)
+            self.statement_handler(standardscreen, wrong, trick, key)
         else: 
-            self.funcs[answer]()
+            self.funcs[key](standardscreen, wrong, trick, answer)
 
     def tuple_constructor(self):
         all_tricks = [i for i in self.statements] + [i for i in 
@@ -258,25 +259,25 @@ class TrickHandler(GameNode):
         standardscreen.refresh()
         state.play(standardscreen, wrong, trick)
 
-    def listen():
+    def listen(self):
         pass
 
-    def pwd():
+    def pwd(self):
         pass
 
-    def sudo():
+    def sudo(self):
         lol = "You think you're clever but really you're a rock"
         standardscreen.clear()
         standardscreen.addstr("\n")
         self.pretty_printing(lol, standardscreen)
         answer = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
         standardscreen.refresh()
-        answer_map["0"].play(standardscreen, wrong, trick)
+        self.answer_map["0"].play(standardscreen, wrong, trick)
 
-    def ls():
+    def ls(self):
         pass
 
-    def kill(self, standardscreen, wrong, trick):
+    def kill(self, standardscreen, wrong, trick, answer):
         kill = ("Maybe I underestimated you. You seem to have learned how" 
                 " things work very quickly. Maybe too quickly.\n\n     Of " 
                 "course you would have this power.")
@@ -285,14 +286,24 @@ class TrickHandler(GameNode):
         self.pretty_printing(kill, standardscreen)
         answer = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
         standardscreen.refresh()
-        answer_map["0"].play(standardscreen, wrong, trick)
+        self.answer_map["0"].play(standardscreen, wrong, trick)
 
-    def logout():
+    def logout(self, standardscreen, wrong, trick, answer):
         standardscreen.clear()
-        answer_map["0"].play(standardscreen, wrong, trick)
+        self.answer_map["0"].play(standardscreen, wrong, trick)
 
-    def echo():
-        pass
+    def echo(self, standardscreen, wrong, trick, answer):
+        reply = ("You call is echoed by the space around you, but it's "
+                "impossible to get a sense of its dimensions. You are alone. "
+                "No one hears you.")
+        standardscreen.clear()
+        standardscreen.addstr("\n")
+        self.pretty_printing("'"+answer[5:]+"'", standardscreen)
+        standardscreen.addstr("\n\n     ")
+        self.pretty_printing(reply, standardscreen)
+        answer = standardscreen.getch(standardscreen.getmaxyx()[0]-2,5)
+        standardscreen.refresh()
+        state.play(standardscreen, wrong, trick)
 
 
 
