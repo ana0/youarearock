@@ -190,42 +190,71 @@ class WrongAnswerHandler(GameNode):
         self.eternity += 1
         self.spasm(standardscreen)
 
+    def indentation_manager(self, standardscreen):
+        pass
+
+
     def glitch_out(self, standardscreen):
         standardscreen.clear()
         standardscreen.addstr("\n ERR: Unidentified Error\n\n",
             curses.color_pair(1))
         standardscreen.addstr("     " + str(self.eternity))
         plain = []
+        probability = [1]
+        for i in range(40):
+            probability.append(0)
         for char in self.glitch:
-            plain.append(char)
-            if standardscreen.getyx()[1]+1 >= standardscreen.getmaxyx()[1]-5:
-                standardscreen.addstr(" \n     ")
-            else:
-                standardscreen.addstr(char)
+             plain.append(char)
+             if standardscreen.getyx()[1]+1 >= standardscreen.getmaxyx()[1]-5:
+                 standardscreen.addstr(" \n     ")
+             else:
+                 standardscreen.addstr(char)
         standardscreen.refresh()
-        time.sleep(1)
-        while len(plain) > 0:
-            change = random.choice(plain)
-            blue_chars = []
-            blue_chars.append(change)
-            plain.remove(change)
+        time.sleep(.5)
+        for i in range(400):
             standardscreen.clear()
             standardscreen.addstr("\n ERR: Unidentified Error\n\n     ",
                 curses.color_pair(1))
+            if i % 10 == 0:
+                probability.pop()
             for char in self.glitch:
-                if char in plain:
-                    if standardscreen.getyx()[1] >= standardscreen.getmaxyx()[1]-5:
+                if random.choice(probability) == 0:
+                    if standardscreen.getyx()[1]+3 >= standardscreen.getmaxyx(
+                            )[1]-5:
                         standardscreen.addstr(" \n     ")
                     else:
                         standardscreen.addstr(char)
                 else:
-                    if standardscreen.getyx()[1]+1 >= standardscreen.getmaxyx()[1]-5:
+                    if standardscreen.getyx()[1]+3 >= standardscreen.getmaxyx(
+                            )[1]-5:
                         standardscreen.addstr(" \n     ")
                     else:
                         standardscreen.addstr(char, curses.color_pair(2))
-            standardscreen.refresh()
-            curses.flash()
-        time.sleep(.5)
+                standardscreen.refresh()
+            time.sleep(.01)
+        #while len(plain) > 0:
+        #     change = random.choice(plain)
+        #     blue_chars = []
+        #     blue_chars.append(change)
+        #     plain.remove(change)
+        #     standardscreen.clear()
+        #     standardscreen.addstr("\n ERR: Unidentified Error\n\n     ",
+        #         curses.color_pair(1))
+        #     for char in self.glitch:
+        #         if char in plain:
+        #             if standardscreen.getyx()[1] >= standardscreen.getmaxyx()[1]-5:
+        #                 standardscreen.addstr(" \n     ")
+        #             else:
+        #                 standardscreen.addstr(char)
+        #         else:
+        #             if standardscreen.getyx()[1]+1 >= standardscreen.getmaxyx()[1]-5:
+        #                 standardscreen.addstr(" \n     ")
+        #             else:
+        #                 standardscreen.addstr(char, curses.color_pair(2))
+        #     standardscreen.refresh()
+        #     curses.flash()
+        # time.sleep(.5)
+
 
 class TrickHandler(GameNode):
     def __init__(self, statements):
