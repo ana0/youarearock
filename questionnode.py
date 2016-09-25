@@ -66,23 +66,26 @@ class GameNode(object):
     def colour_lookup(self, word, standardscreen):
         """goes against a nltk dictionary to get part of speech and change
         colour accordingly"""
-        try:
-            part = everyword[word.strip(" ")]
-            if part in ["WP", "WRB", "TO", "CC", "EX", "WDT"]:
-                standardscreen.addstr(word, curses.color_pair(1))
-            if part in ["NN", "NNS", "NNP"]:
-                standardscreen.addstr(word, curses.color_pair(2))
-            if part in ["JJ", "DT", "JJR", "JJS"]:
-                standardscreen.addstr(word, curses.color_pair(3))
-            if part in ["VBD", "VBG", "VBZ", "VB", "VBP", "VBN"]:
-                standardscreen.addstr(word, curses.color_pair(4))
-            if part in ["RB", "RP", "MD"]:
-                standardscreen.addstr(word, curses.color_pair(5))
-            if part in ["PRP", "IN", "PRP$"]:
-                standardscreen.addstr(word, curses.color_pair(6))
-            if part in ["LS", "CD", "POS", "$", "-NONE-"]:
+        if curses.has_colors():
+            try:
+                part = everyword[word.strip(" ")]
+                if part in ["WP", "WRB", "TO", "CC", "EX", "WDT"]:
+                    standardscreen.addstr(word, curses.color_pair(1))
+                if part in ["NN", "NNS", "NNP"]:
+                    standardscreen.addstr(word, curses.color_pair(2))
+                if part in ["JJ", "DT", "JJR", "JJS"]:
+                    standardscreen.addstr(word, curses.color_pair(3))
+                if part in ["VBD", "VBG", "VBZ", "VB", "VBP", "VBN"]:
+                    standardscreen.addstr(word, curses.color_pair(4))
+                if part in ["RB", "RP", "MD"]:
+                    standardscreen.addstr(word, curses.color_pair(5))
+                if part in ["PRP", "IN", "PRP$"]:
+                    standardscreen.addstr(word, curses.color_pair(6))
+                if part in ["LS", "CD", "POS", "$", "-NONE-"]:
+                    standardscreen.addstr(word)
+            except KeyError:
                 standardscreen.addstr(word)
-        except KeyError:
+        else:
             standardscreen.addstr(word)
 
 
@@ -232,29 +235,6 @@ class WrongAnswerHandler(GameNode):
                         standardscreen.addstr(char, curses.color_pair(2))
                 standardscreen.refresh()
             time.sleep(.01)
-        #while len(plain) > 0:
-        #     change = random.choice(plain)
-        #     blue_chars = []
-        #     blue_chars.append(change)
-        #     plain.remove(change)
-        #     standardscreen.clear()
-        #     standardscreen.addstr("\n ERR: Unidentified Error\n\n     ",
-        #         curses.color_pair(1))
-        #     for char in self.glitch:
-        #         if char in plain:
-        #             if standardscreen.getyx()[1] >= standardscreen.getmaxyx()[1]-5:
-        #                 standardscreen.addstr(" \n     ")
-        #             else:
-        #                 standardscreen.addstr(char)
-        #         else:
-        #             if standardscreen.getyx()[1]+1 >= standardscreen.getmaxyx()[1]-5:
-        #                 standardscreen.addstr(" \n     ")
-        #             else:
-        #                 standardscreen.addstr(char, curses.color_pair(2))
-        #     standardscreen.refresh()
-        #     curses.flash()
-        # time.sleep(.5)
-
 
 class TrickHandler(GameNode):
     def __init__(self, statements):

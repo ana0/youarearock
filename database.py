@@ -202,10 +202,10 @@ thirty2 = NoAnswerNode(["Pressure. Let's call it pressure", ".  .  .  the "
     " expand and contract. They are contained by the skin -- A membrane in "
     "perfect balance."])
 
-thirty3 = GameNode(["Roughly 16,500,000 Pascals envelopes you -- that's "
+thirty3 = GameNode(["Roughly 16,500,000 Pascals envelope you -- that's "
     "2,393.12 pounds per square inch, or 162.84 times the pressure of the "
-    "atmosphere at sea level. It has been with you since you crystalized.", 
-    "Can I remind you that at one time, you crystalized -- literally?", "How "
+    "atmosphere at sea level. It has been with you since you crystallized.", 
+    "Can I remind you that at one time, you crystallized -- literally?", "How "
     "did it feel?"],
     ["0 - It felt good", "1 - It hurt", "2 - I don't remember"])
 
@@ -284,7 +284,7 @@ fifty2 = NoAnswerNode(["Topology is study of how things are connected."])
 
 fifty3 = NoAnswerNode(["Feel your fingertips on the keys of your keyboard "
     "-- this simple interface. From your nerves (radial, median, ulnar) up your"
-    " arms to your synapses, firing.", "(Rock don't have nerves. Rocks don't "
+    " arms to your synapses, firing.", "(Rocks don't have nerves. Rocks don't "
     "have synapses.)", "There is an entire branch of mathematics dedicated to "
     "studying shapes and spaces. There is no way to be sure we're separate.",
     "'Exterior': noun. technical. The union of all open sets of a topological "
