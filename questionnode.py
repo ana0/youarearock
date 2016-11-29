@@ -12,7 +12,7 @@ import os
 state = ""
 
 class GameNode(object):
-    #game node object, contains text and major behaiours
+    #game node object, contains text and major behaviours
 
     def __init__(self, query, options):
         self.query = query
@@ -237,7 +237,12 @@ class WrongAnswerHandler(GameNode):
             time.sleep(.01)
 
 class TrickHandler(GameNode):
+    """There are two types of tricks - statements and funcs. Statements print a 
+    response to the user, funcs contain some independent logic."""
+
     def __init__(self, statements):
+        """statements is a dict of all statements, funcs a dict of all funcs,
+        tricks is a tuple of all statement + func names"""
         self.statements = statements
         self.funcs = {"pwd": self.pwd, "ls": self.ls, 
             "kill": self.kill, "logout": self.logout, "echo": self.echo, "sudo":
@@ -246,21 +251,26 @@ class TrickHandler(GameNode):
         self.answer_map = {}
 
     def play(self, standardscreen, wrong, trick, answer):
+        """checks entered string against all possible trick keywords, using 
+        startswith, and if a match is found, forwards it to the statement 
+        handler or calls the associated func"""
         for i in self.tricks:
             if answer.startswith(i):
                 key = i
-        if answer in self.statements:
+        if key in self.statements:
             self.statement_handler(standardscreen, wrong, trick, key)
         else: 
             self.funcs[key](standardscreen, wrong, trick, answer)
 
     def tuple_constructor(self):
+        """creates a tuple of all the possible tricks, both funcs and 
+        statements"""
         all_tricks = [i for i in self.statements] + [i for i in 
             self.funcs]
         return tuple(all_tricks)
 
     def statement_handler(self, standardscreen, wrong, trick, answer):
-        """prints tricks, then pops player back to global gmae state"""
+        """prints tricks, then pops player back to global game state"""
         global state
         standardscreen.clear()
         standardscreen.addstr("\n")
